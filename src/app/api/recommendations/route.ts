@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-
-// ─── In-memory fallback for local dev (no Supabase env) ──────────────────────
-const localStore: Recommendation[] = [];
+import fs from "fs/promises";
+import path from "path";
 
 export interface Recommendation {
   id: string;
@@ -11,6 +10,27 @@ export interface Recommendation {
   avatar: string;
   rating: number;
   created_at: string;
+}
+
+const filePath = path.join(process.cwd(), "src/data/recommendations.json");
+
+async function readLocalRecommendations(): Promise<Recommendation[]> {
+  try {
+    const data = await fs.readFile(filePath, "utf-8");
+    return JSON.parse(data);
+  } catch (e) {
+    console.error("Error reading local recommendations, using fallback:", e);
+    return [];
+  }
+}
+
+async function writeLocalRecommendations(recs: Recommendation[]) {
+  try {
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, JSON.stringify(recs, null, 2), "utf-8");
+  } catch (e) {
+    console.error("Error writing local recommendations:", e);
+  }
 }
 
 // ─── Supabase helper (lazy — only if env vars exist and are real) ──────────────
@@ -43,8 +63,10 @@ export async function GET() {
     return NextResponse.json(data ?? []);
   }
 
-  // Local fallback
-  return NextResponse.json([...localStore].reverse());
+  // Local file fallback
+  const recs = await readLocalRecommendations();
+  const sortedRecs = [...recs].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  return NextResponse.json(sortedRecs);
 }
 
 // ─── POST /api/recommendations ────────────────────────────────────────────────
@@ -76,7 +98,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(entry, { status: 201 });
   }
 
-  // Local fallback
-  localStore.push(entry);
+  // Local file fallback
+  const recs = await readLocalRecommendations();
+  recs.push(entry);
+  await writeLocalRecommendations(recs);
   return NextResponse.json(entry, { status: 201 });
 }

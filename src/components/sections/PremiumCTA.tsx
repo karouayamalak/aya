@@ -21,6 +21,8 @@ export default function PremiumCTA() {
   const [contactEmail, setContactEmail] = useState("");
   const [contactMessage, setContactMessage] = useState("");
   const [contactSuccess, setContactSuccess] = useState(false);
+  const [contactSubmitting, setContactSubmitting] = useState(false);
+  const [contactError, setContactError] = useState("");
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -100,15 +102,40 @@ export default function PremiumCTA() {
     };
   }, []);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!contactName || !contactEmail || !contactMessage) return;
+    if (!contactName.trim() || !contactEmail.trim() || !contactMessage.trim()) return;
 
-    setContactSuccess(true);
-    setContactName("");
-    setContactEmail("");
-    setContactMessage("");
-    setTimeout(() => setContactSuccess(false), 4000);
+    setContactSubmitting(true);
+    setContactError("");
+    setContactSuccess(false);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: contactName,
+          email: contactEmail,
+          message: contactMessage,
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || "Failed to send message.");
+      }
+
+      setContactSuccess(true);
+      setContactName("");
+      setContactEmail("");
+      setContactMessage("");
+      setTimeout(() => setContactSuccess(false), 5000);
+    } catch (err: any) {
+      setContactError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setContactSubmitting(false);
+    }
   };
 
   return (
@@ -203,10 +230,11 @@ export default function PremiumCTA() {
             <input
               type="text"
               required
+              disabled={contactSubmitting}
               placeholder="e.g. Alex"
               value={contactName}
               onChange={(e) => setContactName(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors disabled:opacity-50"
             />
           </div>
           <div>
@@ -214,10 +242,11 @@ export default function PremiumCTA() {
             <input
               type="email"
               required
+              disabled={contactSubmitting}
               placeholder="e.g. alex@domain.com"
               value={contactEmail}
               onChange={(e) => setContactEmail(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors disabled:opacity-50"
             />
           </div>
           <div>
@@ -225,21 +254,36 @@ export default function PremiumCTA() {
             <textarea
               required
               rows={3}
+              disabled={contactSubmitting}
               placeholder="Let's build a custom interactive project..."
               value={contactMessage}
               onChange={(e) => setContactMessage(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors resize-none"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors resize-none disabled:opacity-50"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-white hover:bg-white/90 text-black font-semibold text-xs py-2 rounded-lg transition-colors cursor-pointer text-center"
+            disabled={contactSubmitting}
+            className="w-full bg-white hover:bg-white/90 disabled:bg-white/50 text-black font-semibold text-xs py-2 rounded-lg transition-colors cursor-pointer text-center flex items-center justify-center gap-2"
           >
-            Send Message
+            {contactSubmitting ? (
+              <>
+                <svg className="animate-spin h-3.5 w-3.5 text-black" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Sending...
+              </>
+            ) : "Send Message"}
           </button>
           {contactSuccess && (
             <div className="text-emerald-400 text-[9px] text-center font-semibold mt-1">
               ✓ Message sent successfully! I will reach out soon.
+            </div>
+          )}
+          {contactError && (
+            <div className="text-red-400 text-[9px] text-center font-semibold mt-1">
+              ✕ {contactError}
             </div>
           )}
         </form>

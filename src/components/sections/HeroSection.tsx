@@ -42,14 +42,37 @@ export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isSliding, setIsSliding] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const activeIndexRef = useRef(0);
   const slideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const activeSlides = isMobile ? slides.slice(0, 3) : slides;
+  const slidesCountRef = useRef(slides.length);
+
+  useEffect(() => {
+    slidesCountRef.current = activeSlides.length;
+    if (activeIndex >= activeSlides.length) {
+      const nextIndex = activeSlides.length - 1;
+      setActiveIndex(nextIndex);
+      activeIndexRef.current = nextIndex;
+    }
+  }, [activeSlides.length, activeIndex]);
+
   const handleGoToSlide = (i: number) => {
     const st = ScrollTrigger.getById("hero-trigger");
     if (st) {
-      const targetScroll = st.start + (i / (slides.length - 1)) * (st.end - st.start);
+      const count = slidesCountRef.current;
+      const targetScroll = st.start + (i / (count - 1)) * (st.end - st.start);
       window.scrollTo({ top: targetScroll, behavior: "smooth" });
     }
   };
@@ -66,8 +89,9 @@ export default function HeroSection() {
       scrub: 0.8,
       onUpdate: (self) => {
         const p = self.progress;
-        const rawIndex = Math.floor(p * slides.length);
-        const index = Math.min(Math.max(rawIndex, 0), slides.length - 1);
+        const count = slidesCountRef.current;
+        const rawIndex = Math.floor(p * count);
+        const index = Math.min(Math.max(rawIndex, 0), count - 1);
 
         if (index !== activeIndexRef.current) {
           activeIndexRef.current = index;
@@ -96,7 +120,7 @@ export default function HeroSection() {
         if (prev >= 0) handleGoToSlide(prev);
       } else if (e.key === "ArrowRight") {
         const next = activeIndexRef.current + 1;
-        if (next < slides.length) handleGoToSlide(next);
+        if (next < slidesCountRef.current) handleGoToSlide(next);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -148,13 +172,13 @@ export default function HeroSection() {
         {/* Slide counter */}
         <div className="absolute top-6 right-6 z-[50] pointer-events-none">
           <span className="text-white/40 text-[11px] font-medium tabular-nums" style={{ fontFamily: "var(--font-inter)" }}>
-            {String(activeIndex + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
+            {String(activeIndex + 1).padStart(2, "0")} / {String(activeSlides.length).padStart(2, "0")}
           </span>
         </div>
 
         {/* Slides */}
         <div className={`slides w-full h-full relative ${isSliding ? "is-sliding" : ""}`} style={{ background: "transparent" }}>
-          {slides.map((slide, i) => {
+          {activeSlides.map((slide, i) => {
             const isActive = i === activeIndex;
             const isPrev  = i === activeIndex - 1;
             const isNext  = i === activeIndex + 1;
@@ -182,20 +206,46 @@ export default function HeroSection() {
                     </div>
                   )}
                   
-                  {/* Text */}
-                  <div className="slide__header relative z-10 px-4">
-                    <h1 className="slide__title">
-                      <span className="title-line">
-                        <span className="text-white">{slide.titleLine1}</span>
-                      </span>
-                      <span className="title-line mt-1.5">
-                        <span style={{ color: slide.glowColor }} className="transition-colors duration-[1.2s]">
-                          {slide.titleLine2}
+                  {/* Text or Picture Card */}
+                  {i === 3 ? (
+                    <div className="slide__header relative z-10 px-4 flex flex-col items-center justify-center">
+                      <div
+                        className={`w-[290px] sm:w-[320px] rounded-2xl bg-zinc-900/60 border border-white/10 p-5 md:p-6 flex flex-col justify-between items-center text-center shadow-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-700 transform ${
+                          isActive ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95 pointer-events-none"
+                        }`}
+                      >
+                        {/* Glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
+                        
+                        {/* Rectangular placeholder for picture */}
+                        <div className="w-full aspect-[4/5] bg-zinc-950/80 border border-white/5 rounded-xl flex flex-col items-center justify-center relative overflow-hidden mb-4 shadow-inner">
+                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_80%)]" />
+                          <svg className="w-12 h-12 text-white/20 mb-2 group-hover:text-white/40 group-hover:scale-105 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                          </svg>
+                          <span className="text-[10px] text-white/30 tracking-widest uppercase" style={{ fontFamily: "var(--font-inter)" }}>Your Picture Here</span>
+                        </div>
+                        <div className="w-full">
+                          <h3 className="text-white text-base font-semibold tracking-wide" style={{ fontFamily: "var(--font-inter)" }}>Aya Karou</h3>
+                          <p className="text-white/50 text-[11px] mt-1 font-light" style={{ fontFamily: "var(--font-inter)" }}>ESTIN Student &amp; Creative Developer</p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="slide__header relative z-10 px-4">
+                      <h1 className="slide__title">
+                        <span className="title-line">
+                          <span className="text-white">{slide.titleLine1}</span>
                         </span>
-                      </span>
-                    </h1>
-                    <p className="slide__subtitle" style={{ color: "rgba(255, 255, 255, 0.8)" }}>{slide.subtitle}</p>
-                  </div>
+                        <span className="title-line mt-1.5">
+                          <span style={{ color: slide.glowColor }} className="transition-colors duration-[1.2s]">
+                            {slide.titleLine2}
+                          </span>
+                        </span>
+                      </h1>
+                      <p className="slide__subtitle" style={{ color: "rgba(255, 255, 255, 0.8)" }}>{slide.subtitle}</p>
+                    </div>
+                  )}
                 </div>
               </div>
             );
@@ -204,7 +254,7 @@ export default function HeroSection() {
 
         {/* Dot indicators */}
         <div className="absolute bottom-[58px] left-1/2 -translate-x-1/2 flex gap-2 z-[50]">
-          {slides.map((_, i) => (
+          {activeSlides.map((_, i) => (
             <button
               key={i}
               onClick={() => handleGoToSlide(i)}
@@ -229,8 +279,8 @@ export default function HeroSection() {
               Prev
             </button>
             <button
-              onClick={() => { const n = activeIndexRef.current + 1; if (n < slides.length) handleGoToSlide(n); }}
-              disabled={activeIndex === slides.length - 1}
+              onClick={() => { const n = activeIndexRef.current + 1; if (n < activeSlides.length) handleGoToSlide(n); }}
+              disabled={activeIndex === activeSlides.length - 1}
               className="disabled:opacity-30 disabled:pointer-events-none transition-all"
             >
               Next

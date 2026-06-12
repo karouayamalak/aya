@@ -31,6 +31,20 @@ async function writeContacts(contacts: ContactMessage[]) {
   }
 }
 
+// ─── Supabase helper (lazy — only if env vars exist and are real) ──────────────
+async function getSupabase() {
+  const url  = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key  = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key || url === "your_supabase_project_url" || !url.startsWith("https://")) return null;
+  try {
+    const { createClient } = await import("@supabase/supabase-js");
+    return createClient(url, key);
+  } catch (e) {
+    console.error("Failed to initialize Supabase client:", e);
+    return null;
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -51,6 +65,19 @@ export async function POST(req: NextRequest) {
       message: String(message).slice(0, 2000),
       created_at: new Date().toISOString(),
     };
+
+    const supabase = await getSupabase();
+    if (supabase) {
+      const { error } = await supabase.from("contacts").insert([newMessage]);
+      if (error) {
+        // Fallback check for "contact_messages" table name
+        const { error: error2 } = await supabase.from("contact_messages").insert([newMessage]);
+        if (error2) {
+          return NextResponse.json({ error: error2.message }, { status: 500 });
+        }
+      }
+      return NextResponse.json({ success: true, message: newMessage }, { status: 201 });
+    }
 
     const contacts = await readContacts();
     contacts.push(newMessage);

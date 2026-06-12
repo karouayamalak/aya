@@ -197,7 +197,7 @@ export default function HeroSection() {
                           <img
                             src="/photo_2026-06-12_20-42-13.jpg"
                             alt="Aya Karou"
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out profile-pic-slide4"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out hero-card-img"
                           />
                         </div>
                         <div className="w-full">

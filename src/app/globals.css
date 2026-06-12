@@ -602,3 +602,14 @@ nav[aria-label="Chapter navigation"] a {
   animation: flap 0.3s ease-in-out infinite;
 }
 
+/* User profile photo shifting on slide 4 */
+.profile-pic-slide4 {
+  object-position: 50px 50%; /* mobile: push 50px to the right */
+}
+
+@media (min-width: 768px) {
+  .profile-pic-slide4 {
+    object-position: -180px 50%; /* desktop: push 180px to the left */
+  }
+}
+

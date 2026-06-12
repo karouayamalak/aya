@@ -42,37 +42,14 @@ export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isSliding, setIsSliding] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   const activeIndexRef = useRef(0);
   const slideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const activeSlides = isMobile ? slides.slice(0, 3) : slides;
-  const slidesCountRef = useRef(slides.length);
-
-  useEffect(() => {
-    slidesCountRef.current = activeSlides.length;
-    if (activeIndex >= activeSlides.length) {
-      const nextIndex = activeSlides.length - 1;
-      setActiveIndex(nextIndex);
-      activeIndexRef.current = nextIndex;
-    }
-  }, [activeSlides.length, activeIndex]);
-
   const handleGoToSlide = (i: number) => {
     const st = ScrollTrigger.getById("hero-trigger");
     if (st) {
-      const count = slidesCountRef.current;
-      const targetScroll = st.start + (i / (count - 1)) * (st.end - st.start);
+      const targetScroll = st.start + (i / (slides.length - 1)) * (st.end - st.start);
       window.scrollTo({ top: targetScroll, behavior: "smooth" });
     }
   };
@@ -89,9 +66,8 @@ export default function HeroSection() {
       scrub: 0.8,
       onUpdate: (self) => {
         const p = self.progress;
-        const count = slidesCountRef.current;
-        const rawIndex = Math.floor(p * count);
-        const index = Math.min(Math.max(rawIndex, 0), count - 1);
+        const rawIndex = Math.floor(p * slides.length);
+        const index = Math.min(Math.max(rawIndex, 0), slides.length - 1);
 
         if (index !== activeIndexRef.current) {
           activeIndexRef.current = index;
@@ -120,7 +96,7 @@ export default function HeroSection() {
         if (prev >= 0) handleGoToSlide(prev);
       } else if (e.key === "ArrowRight") {
         const next = activeIndexRef.current + 1;
-        if (next < slidesCountRef.current) handleGoToSlide(next);
+        if (next < slides.length) handleGoToSlide(next);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -172,13 +148,13 @@ export default function HeroSection() {
         {/* Slide counter */}
         <div className="absolute top-6 right-6 z-[50] pointer-events-none">
           <span className="text-white/40 text-[11px] font-medium tabular-nums" style={{ fontFamily: "var(--font-inter)" }}>
-            {String(activeIndex + 1).padStart(2, "0")} / {String(activeSlides.length).padStart(2, "0")}
+            {String(activeIndex + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
           </span>
         </div>
 
         {/* Slides */}
         <div className={`slides w-full h-full relative ${isSliding ? "is-sliding" : ""}`} style={{ background: "transparent" }}>
-          {activeSlides.map((slide, i) => {
+          {slides.map((slide, i) => {
             const isActive = i === activeIndex;
             const isPrev  = i === activeIndex - 1;
             const isNext  = i === activeIndex + 1;
@@ -210,7 +186,7 @@ export default function HeroSection() {
                   {i === 3 ? (
                     <div className="slide__header relative z-10 px-4 flex flex-col items-center justify-center">
                       <div
-                        className={`w-[290px] sm:w-[320px] rounded-2xl bg-zinc-900/60 border border-white/10 p-5 md:p-6 flex flex-col justify-between items-center text-center shadow-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-700 transform ${
+                        className={`w-[270px] sm:w-[320px] rounded-2xl bg-zinc-900/60 border border-white/10 p-5 md:p-6 flex flex-col justify-between items-center text-center shadow-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-700 transform ${
                           isActive ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95 pointer-events-none"
                         }`}
                       >
@@ -254,7 +230,7 @@ export default function HeroSection() {
 
         {/* Dot indicators */}
         <div className="absolute bottom-[58px] left-1/2 -translate-x-1/2 flex gap-2 z-[50]">
-          {activeSlides.map((_, i) => (
+          {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => handleGoToSlide(i)}
@@ -279,8 +255,8 @@ export default function HeroSection() {
               Prev
             </button>
             <button
-              onClick={() => { const n = activeIndexRef.current + 1; if (n < activeSlides.length) handleGoToSlide(n); }}
-              disabled={activeIndex === activeSlides.length - 1}
+              onClick={() => { const n = activeIndexRef.current + 1; if (n < slides.length) handleGoToSlide(n); }}
+              disabled={activeIndex === slides.length - 1}
               className="disabled:opacity-30 disabled:pointer-events-none transition-all"
             >
               Next

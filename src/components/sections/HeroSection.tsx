@@ -113,7 +113,7 @@ export default function HeroSection() {
     >
       {/* Sticky viewport frame */}
       <div className="sticky top-0 w-full h-screen overflow-hidden bg-black select-none">
-        
+
         {/* LightRays Background */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-80">
           <LightRays
@@ -156,8 +156,8 @@ export default function HeroSection() {
         <div className={`slides w-full h-full relative ${isSliding ? "is-sliding" : ""}`} style={{ background: "transparent" }}>
           {slides.map((slide, i) => {
             const isActive = i === activeIndex;
-            const isPrev  = i === activeIndex - 1;
-            const isNext  = i === activeIndex + 1;
+            const isPrev = i === activeIndex - 1;
+            const isNext = i === activeIndex + 1;
 
             return (
               <div
@@ -165,9 +165,9 @@ export default function HeroSection() {
                 className={`slide ${isActive ? "is-active" : ""} ${isPrev ? "is-prev" : ""} ${isNext ? "is-next" : ""}`}
               >
                 <div className="slide__content h-full flex flex-col justify-center items-center text-center relative">
-                  
+
                   {/* Left Sketch: Moth */}
-                  <div 
+                  <div
                     className="absolute left-[2%] lg:left-[8%] bottom-[12%] lg:bottom-auto lg:top-[26%] w-28 h-28 md:w-44 md:h-44 lg:w-56 lg:h-56 pointer-events-none opacity-20 lg:opacity-25 z-0 select-none transition-all lg:-translate-x-[30px] lg:translate-y-[100px]"
                   >
                     <img src="/moth_sketch.png" alt="" className="w-full h-full object-contain theme-sketch" />
@@ -175,31 +175,31 @@ export default function HeroSection() {
 
                   {/* Right Sketch: Butterfly */}
                   {slide.image && (
-                    <div 
+                    <div
                       className="absolute right-[4%] top-[10%] bottom-auto left-auto lg:right-[8%] lg:top-[26%] lg:bottom-auto lg:left-auto w-28 h-28 md:w-44 md:h-44 lg:w-56 lg:h-56 pointer-events-none opacity-20 lg:opacity-25 z-0 select-none transition-all lg:translate-x-[100px]"
                     >
                       <img src={slide.image} alt="" className="w-full h-full object-contain theme-sketch" />
                     </div>
                   )}
-                  
+
                   {/* Text or Picture Card */}
                   {i === 3 ? (
                     <div className="slide__header relative z-10 px-4 flex flex-col items-center justify-center">
                       <div
-                        className={`w-[270px] sm:w-[320px] rounded-2xl bg-zinc-900/60 border border-white/10 p-5 md:p-6 flex flex-col justify-between items-center text-center shadow-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-700 transform ${
-                          isActive ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95 pointer-events-none"
-                        }`}
+                        className={`w-[270px] sm:w-[320px] rounded-2xl bg-zinc-900/60 border border-white/10 p-5 md:p-6 flex flex-col justify-between items-center text-center shadow-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-700 transform ${isActive ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95 pointer-events-none"
+                          }`}
                       >
                         {/* Glow effect */}
                         <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
-                        
-                        {/* Rectangular placeholder for picture */}
-                        <div className="w-full aspect-[4/5] bg-zinc-950/80 border border-white/5 rounded-xl flex flex-col items-center justify-center relative overflow-hidden mb-4 shadow-inner">
-                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_80%)]" />
-                          <svg className="w-12 h-12 text-white/20 mb-2 group-hover:text-white/40 group-hover:scale-105 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                          </svg>
-                          <span className="text-[10px] text-white/30 tracking-widest uppercase" style={{ fontFamily: "var(--font-inter)" }}>Your Picture Here</span>
+
+                        {/* Rectangular picture container */}
+                        <div className="w-full aspect-[4/5] bg-zinc-950 border border-white/5 rounded-xl relative overflow-hidden mb-4 shadow-2xl">
+                          <img
+                            src="/photo_2026-06-12_20-42-13.jpg"
+                            alt="Aya Karou"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s] ease-out"
+                            style={{ objectPosition: '-180px 50%' }}
+                          />
                         </div>
                         <div className="w-full">
                           <h3 className="text-white text-base font-semibold tracking-wide" style={{ fontFamily: "var(--font-inter)" }}>Aya Karou</h3>
@@ -234,11 +234,10 @@ export default function HeroSection() {
             <button
               key={i}
               onClick={() => handleGoToSlide(i)}
-              className={`rounded-full transition-all duration-300 cursor-pointer ${
-                i === activeIndex
+              className={`rounded-full transition-all duration-300 cursor-pointer ${i === activeIndex
                   ? "w-5 h-1.5 bg-white" // White active dot
                   : "w-1.5 h-1.5 bg-white/20 hover:bg-white/45" // White translucent inactive dots
-              }`}
+                }`}
               aria-label={`Go to slide ${i + 1}`}
             />
           ))}

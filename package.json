@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "process-images": "python scripts/remove_bg.py && python scripts/add_recommendations_from_images.py",
     "lint": "eslint"
   },
   "dependencies": {

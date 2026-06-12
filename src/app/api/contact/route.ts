@@ -34,7 +34,10 @@ async function writeContacts(contacts: ContactMessage[]) {
 // ─── Supabase helper (lazy — only if env vars exist and are real) ──────────────
 async function getSupabase() {
   const url  = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key  = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  let key  = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!key || key === "your_supabase_service_role_key") {
+    key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  }
   if (!url || !key || url === "your_supabase_project_url" || !url.startsWith("https://")) return null;
   try {
     const { createClient } = await import("@supabase/supabase-js");

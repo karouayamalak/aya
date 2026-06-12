@@ -36,7 +36,10 @@ async function writeLocalRecommendations(recs: Recommendation[]) {
 // ─── Supabase helper (lazy — only if env vars exist and are real) ──────────────
 async function getSupabase() {
   const url  = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key  = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  let key  = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!key || key === "your_supabase_service_role_key") {
+    key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  }
   if (!url || !key || url === "your_supabase_project_url" || !url.startsWith("https://")) return null;
   try {
     const { createClient } = await import("@supabase/supabase-js");
@@ -50,6 +53,7 @@ async function getSupabase() {
 // ─── GET /api/recommendations ─────────────────────────────────────────────────
 export async function GET() {
   const supabase = await getSupabase();
+  const localRecs = await readLocalRecommendations();
 
   if (supabase) {
     const { data, error } = await supabase
@@ -58,14 +62,27 @@ export async function GET() {
       .order("created_at", { ascending: false });
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      // If Supabase fails, fallback to local
+      console.error("Supabase read error, falling back to local:", error);
+      const sortedRecs = [...localRecs].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      return NextResponse.json(sortedRecs);
     }
-    return NextResponse.json(data ?? []);
+    
+    // Merge local recommendations and db recommendations
+    const dbRecs = data ?? [];
+    const merged = [...dbRecs];
+    const dbIds = new Set(dbRecs.map(r => r.id));
+    for (const lr of localRecs) {
+      if (!dbIds.has(lr.id)) {
+        merged.push(lr);
+      }
+    }
+    merged.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    return NextResponse.json(merged);
   }
 
   // Local file fallback
-  const recs = await readLocalRecommendations();
-  const sortedRecs = [...recs].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  const sortedRecs = [...localRecs].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   return NextResponse.json(sortedRecs);
 }
 

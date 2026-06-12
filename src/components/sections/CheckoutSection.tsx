@@ -46,24 +46,24 @@ function Stars({ rating, interactive = false, onChange }: { rating: number; inte
 
 /* ─── Main Component ─────────────────────────────────────────────────────────── */
 export default function CheckoutSection() {
-  const sectionRef   = useRef<HTMLDivElement>(null);
-  const formRef      = useRef<HTMLDivElement>(null);
-  const feedRef      = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+  const feedRef = useRef<HTMLDivElement>(null);
 
   /* Feed state */
-  const [recs, setRecs]       = useState<Recommendation[]>([]);
+  const [recs, setRecs] = useState<Recommendation[]>([]);
   const [loading, setLoading] = useState(true);
   const [fetchErr, setFetchErr] = useState(false);
 
   /* Form state */
-  const [name,    setName]    = useState("");
-  const [role,    setRole]    = useState("");
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
   const [comment, setComment] = useState("");
-  const [avatar,  setAvatar]  = useState(PRESET_AVATARS[0].url);
-  const [rating,  setRating]  = useState(5);
+  const [avatar, setAvatar] = useState(PRESET_AVATARS[0].url);
+  const [rating, setRating] = useState(5);
   const [submitting, setSubmitting] = useState(false);
-  const [success,    setSuccess]    = useState(false);
-  const [submitErr,  setSubmitErr]  = useState("");
+  const [success, setSuccess] = useState(false);
+  const [submitErr, setSubmitErr] = useState("");
 
   /* Custom avatar state and ref */
   const [customAvatar, setCustomAvatar] = useState<string | null>(null);
@@ -159,7 +159,7 @@ export default function CheckoutSection() {
       aria-label="Feedback chapter"
       style={{ fontFamily: "var(--font-inter)" }}
     >
-      {/* Decorative hand-drawn sparkle sketches */}
+      {/* Decorative hand-drawn sketches */}
       <div className="absolute right-[2%] bottom-[5%] w-44 h-44 md:w-64 md:h-64 pointer-events-none opacity-[0.08] z-0 select-none">
         <img src="/sparkle_sketch.png" alt="" className="w-full h-full object-contain theme-sketch" />
       </div>
@@ -169,7 +169,14 @@ export default function CheckoutSection() {
 
       <div className="w-full px-6 md:px-12 py-10 md:py-16 max-w-7xl mx-auto relative z-10 bg-zinc-950 border border-zinc-800 rounded-3xl shadow-2xl overflow-hidden">
         {/* Glow behind the dark panel */}
+        {/* Glow behind the dark panel */}
         <div className="absolute inset-0 pointer-events-none opacity-20" style={{ background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%)" }} />
+
+        {/* Small botanical sketch illustrations placed in random spots */}
+        <div className="absolute bottom-[6%] right-[3%] w-[74px] h-[74px] md:w-[86px] md:h-[86px] pointer-events-none opacity-85 z-20 select-none -rotate-12 transition-transform duration-500 hover:scale-110">
+          <img src="/processed/6a755a4070816daea2c843b17c8497c4.jpg" alt="" className="w-full h-full object-contain" />
+        </div>
+
 
         {/* ── Header ──────────────────────────────────────────────────────────── */}
         <div className="mb-12 relative z-10">

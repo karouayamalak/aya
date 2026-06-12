@@ -1,0 +1,7 @@
+{
+  // Suppress false-positive warnings from the VS Code CSS language server
+  // for Tailwind CSS v4 directives (@theme, @utility, etc.) which the
+  // built-in validator doesn't recognise.
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore"
+}

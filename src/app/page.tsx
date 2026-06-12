@@ -1,65 +1,129 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SmoothScrollProvider from "../components/SmoothScrollProvider";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import BackgroundController from "../components/BackgroundController";
+import HeroSection from "../components/sections/HeroSection";
+import OnlineSection from "../components/sections/OnlineSection";
+import AgenticSection from "../components/sections/AgenticSection";
+import RetailSection from "../components/sections/RetailSection";
+import CheckoutSection from "../components/sections/CheckoutSection";
+import PremiumCTA from "../components/sections/PremiumCTA";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const [loaded, setLoaded] = useState(true);
+
+  useEffect(() => {
+    if (!loaded) return;
+
+    // ScrollTrigger animation for the green butterfly to fly across the viewport on scroll
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "main",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 3.5, // Smooth scrubbing - makes flight move slower and floatier
+      }
+    });
+
+    // Animate fixed positions relative to viewport, rotation, and scale for flying effect
+    tl.to("#green-butterfly", { left: "85%", top: "35%", rotation: 40, ease: "power1.inOut" })
+      .to("#green-butterfly", { left: "10%", top: "60%", rotation: -35, ease: "power1.inOut" })
+      .to("#green-butterfly", { left: "90%", top: "25%", rotation: 20, ease: "power1.inOut" })
+      .to("#green-butterfly", { left: "12%", top: "70%", rotation: -45, ease: "power1.inOut" })
+      .to("#green-butterfly", { left: "80%", top: "45%", rotation: 15, ease: "power1.inOut" })
+      .to("#green-butterfly", { left: "15%", top: "80%", rotation: -20, ease: "power1.inOut" });
+
+  }, [loaded]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+
+      <SmoothScrollProvider>
+        {/*
+         * DOCUMENT FLOW ARCHITECTURE
+         * ─────────────────────────────────────────────────────────────────
+         * Each section is a standard block in normal document flow.
+         * Background color transitions are managed by BackgroundController
+         * (GSAP ScrollTrigger watching data-chapter on each section).
+         * The WebGL starfield fades out when entering light/beige sections.
+         *
+         * z-index ladder:
+         *   WebGL canvas z-0, sections z-10+, Header/Sidebar z-50+
+         */}
+        <div
+          className="relative min-h-screen text-white font-sans overflow-x-hidden"
+          style={{ WebkitFontSmoothing: "antialiased" }}
+        >
+
+          {/* Background color + WebGL opacity controller */}
+          <BackgroundController />
+
+          {/* ── Sticky Green Butterfly Flying Down the Page ── */}
+          {loaded && (
+            <div
+              id="green-butterfly"
+              className="fixed pointer-events-none z-[99] w-16 md:w-24 aspect-[0.56] select-none animate-flap transition-opacity duration-300"
+              style={{
+                top: "15%",
+                left: "10%",
+                transform: "translate(-50%, -50%)",
+              }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <img
+                src="/user_sketch_1.png"
+                alt=""
+                className="w-full h-full object-contain"
+              />
+            </div>
+          )}
+
+          {/* Persistent chrome */}
+          <Header />
+          <Sidebar />
+
+          {/* Scroll story — all sections in document flow */}
+          <main className="relative w-full flex flex-col">
+
+            {/* ── Hero (beige) ───────────────────────────────────────── */}
+            <div className="relative" style={{ zIndex: 10 }}>
+              <HeroSection />
+            </div>
+
+            {/* ── Ch. II  Projects (dark) ───────────────────────────── */}
+            <div className="relative" style={{ zIndex: 20 }}>
+              <OnlineSection />
+            </div>
+
+            {/* ── Ch. III  Experience (dark) ────────────────────────── */}
+            <div className="relative" style={{ zIndex: 30 }}>
+              <AgenticSection />
+            </div>
+
+            {/* ── Ch. IV  Tech Stack (dark, compact) ───────────────── */}
+            <div className="relative" style={{ zIndex: 40 }}>
+              <RetailSection />
+            </div>
+
+            {/* ── Ch. V  Feedback (beige) ──────────────────────────── */}
+            <div className="relative" style={{ zIndex: 50 }}>
+              <CheckoutSection />
+            </div>
+
+            {/* ── Ch. VI  Contact + Footer (dark) ──────────────────── */}
+            <div className="relative" style={{ zIndex: 60 }}>
+              <PremiumCTA />
+            </div>
+
+          </main>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </SmoothScrollProvider>
+    </>
   );
 }

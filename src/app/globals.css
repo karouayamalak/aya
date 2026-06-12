@@ -1,26 +1,604 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-inter: 'Inter', sans-serif;
+  --bg-beige: #f4f1ea;
+  --text-dark: #121212;
+  --text-muted: #555555;
+  --border-muted: rgba(0, 0, 0, 0.08);
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --font-playfair: var(--font-inter);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --font-serif: var(--font-inter);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-beige-bg: var(--bg-beige);
+  --color-brand-dark: var(--text-dark);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── Lenis smooth scroll ─────────────────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis-smooth { scroll-behavior: auto !important; }
+.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis-stopped { overflow: hidden; }
+.lenis-scrolling iframe { pointer-events: none; }
+
+/* ─── Base ────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Smooth GSAP background color transitions between sections */
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Subtle grain texture overlay (adds premium depth) ──────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 192px 192px;
+}
+
+/* ─── WebGL starfield fade on light sections ──────────────────────────── */
+/* GSAP toggleClass adds/removes this when entering beige sections         */
+.webgl-fade-out {
+  opacity: 0 !important;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.webgl-fade-in {
+  opacity: 1 !important;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Custom scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+
+/* ─── THE CORE STACKING ANIMATION SYSTEM ─────────────────────────────── */
+/*
+ * Every sticky section sits directly on top of the previous one.
+ * The torn-paper leading edge on each new section slides up from below
+ * revealing the new background while leaving the previous one visible
+ * underneath (until the full bg-fill div covers it).
+ * 
+ * z-index ladder:  hero=10, sidekick=20, agentic=30, online=40,
+ *                  retail=50, marketing=60, checkout=70, cta=80
+ */
+
+/* ─── Torn paper edges ────────────────────────────────────────────────── */
+/* 
+ * Each sticky section has an invisible top strip (h-16/h-20) containing
+ * the organic torn SVG path, then a flex-1 solid fill below it.
+ * The path uses url(#torn-paper) displacement filter from layout.tsx.
+ */
+
+/* ─── Glassmorphic panels ─────────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04), 0 1px 0 rgba(255,255,255,0.8) inset;
+}
+
+/* ─── Premium bento card ──────────────────────────────────────────────── */
+.bento-card {
+  background: rgba(255, 255, 255, 0.028);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 1rem;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.bento-card:hover {
+  border-color: rgba(255, 255, 255, 0.13);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Section ambient glow ────────────────────────────────────────────── */
+.section-glow-gold {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(212, 160, 23, 0.3) 0%, transparent 70%);
+}
+.section-glow-indigo {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+}
+
+/* ─── Hover shine sweep effect ────────────────────────────────────────── */
+.hover-shine-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.hover-shine-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -160%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.13) 50%, transparent 100%);
+  transform: skewX(-22deg);
+  transition: 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+.hover-shine-wrapper:hover::after { left: 160%; }
+
+/* ─── Sidebar text mix-blend so it shows on any background ───────────── */
+.sidebar-label {
+  mix-blend-mode: difference;
+  color: #fff;
+}
+
+/* ─── Magnetic button reset ───────────────────────────────────────────── */
+.magnetic-btn {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Chapter heading italic serif ───────────────────────────────────── */
+.chapter-heading {
+  font-family: var(--font-playfair);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 50%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ─── Starfield twinkle animation ────────────────────────────────────── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.star-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* ─── Section reveal: used for non-scrubbed sections ─────────────────── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Torn paper SVG path displacement helpers ────────────────────────── */
+/*
+ * The feTurbulence filter defined in layout.tsx (id="torn-paper")
+ * adds organic fractal displacement to the clean SVG bezier curves.
+ * Each section uses a unique path shape so tears look different.
+ */
+
+/* ─── Premium selection highlight ────────────────────────────────────── */
+::selection {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+/* ─── Focus outline reset for aesthetics ─────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Smooth image rendering ─────────────────────────────────────────── */
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ─── Canvas pointer events passthrough ──────────────────────────────── */
+canvas {
+  pointer-events: none;
+}
+
+/* ─── Global Theme Adaptation ─────────────────────────────── */
+[data-theme="beige"] {
+  --text-primary: #121212;
+  --text-secondary: rgba(18, 18, 18, 0.55);
+}
+[data-theme="dark"] {
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.55);
+}
+
+/* Smooth transitions for theme switching */
+.text-white, [class*="text-white/"],
+.bg-white, [class*="bg-white/"],
+.border-white, [class*="border-white/"],
+.text-black, [class*="text-black/"],
+.bg-black, [class*="bg-black/"] {
+  transition: color 0.6s ease, background-color 0.6s ease, border-color 0.6s ease;
+}
+
+/* Automatically invert colors on beige backgrounds */
+[data-theme="beige"] .text-white { color: #121212 !important; }
+[data-theme="beige"] .text-white\/10 { color: rgba(18, 18, 18, 0.1) !important; }
+[data-theme="beige"] .text-white\/20 { color: rgba(18, 18, 18, 0.2) !important; }
+[data-theme="beige"] .text-white\/25 { color: rgba(18, 18, 18, 0.25) !important; }
+[data-theme="beige"] .text-white\/30 { color: rgba(18, 18, 18, 0.3) !important; }
+[data-theme="beige"] .text-white\/35 { color: rgba(18, 18, 18, 0.35) !important; }
+[data-theme="beige"] .text-white\/40 { color: rgba(18, 18, 18, 0.4) !important; }
+[data-theme="beige"] .text-white\/45 { color: rgba(18, 18, 18, 0.45) !important; }
+[data-theme="beige"] .text-white\/50 { color: rgba(18, 18, 18, 0.5) !important; }
+[data-theme="beige"] .text-white\/55 { color: rgba(18, 18, 18, 0.55) !important; }
+[data-theme="beige"] .text-white\/60 { color: rgba(18, 18, 18, 0.6) !important; }
+[data-theme="beige"] .text-white\/70 { color: rgba(18, 18, 18, 0.7) !important; }
+[data-theme="beige"] .text-white\/80 { color: rgba(18, 18, 18, 0.8) !important; }
+
+[data-theme="beige"] .bg-white { background-color: #121212 !important; }
+[data-theme="beige"] .bg-white\/5 { background-color: rgba(18, 18, 18, 0.05) !important; }
+[data-theme="beige"] .bg-white\/10 { background-color: rgba(18, 18, 18, 0.1) !important; }
+
+[data-theme="beige"] .border-white { border-color: #121212 !important; }
+[data-theme="beige"] .border-white\/10 { border-color: rgba(18, 18, 18, 0.1) !important; }
+[data-theme="beige"] .border-white\/20 { border-color: rgba(18, 18, 18, 0.2) !important; }
+
+
+/* ─── Pulse animation for live indicators ────────────────────────────── */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+.live-dot {
+  animation: live-pulse 1.5s ease-in-out infinite;
+}
+
+/* ─── Timeline progress line ─────────────────────────────────────────── */
+.timeline-line {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+}
+
+/* ─── POS device glow ────────────────────────────────────────────────── */
+.pos-glow {
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.15), 0 30px 60px rgba(0, 0, 0, 0.8);
+}
+
+/* ─── Sidebar mix-blend visibility on both dark and light backgrounds ── */
+nav[aria-label="Chapter navigation"] span,
+nav[aria-label="Chapter navigation"] a {
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ─── Accessibility: reduce motion for users who prefer it ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── No-JS fallback: show content if JS is disabled ─────────────────── */
+/* ─── No-JS fallback: show content if JS is disabled ─────────────────── */
+.js-loading * {
+  visibility: hidden;
 }
+
+/* ─── Print styles ─────────────────────────────────────────────────────── */
+@media print {
+  .fixed, .sticky { position: static !important; }
+  canvas { display: none !important; }
+  body { background: white !important; color: black !important; }
+}
+
+
+/* ─── Marquee animation (Tech Stack horizontal scroll) ────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.marquee-track {
+  animation: marquee 15s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation: marquee-reverse 15s linear infinite;
+}
+
+.marquee-track:hover,
+.marquee-track-reverse:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Loading screen letter reveal ────────────────────────────────────── */
+@keyframes loading-bar {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ─── SliceSlider Styles (Dark Adaptations with Cyan Accents) ──────────── */
+.slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000000;
+}
+
+.slides-nav {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  z-index: 100;
+}
+
+@media (max-width: 768px) {
+  .slides-nav {
+    bottom: 30px;
+    right: 24px;
+  }
+}
+
+.slides-nav__nav {
+  display: flex;
+  gap: 12px;
+}
+
+.slides-nav__nav button {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 12px 28px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+
+.slides-nav__nav button:hover {
+  background: #00ffff;
+  color: #000;
+  border-color: #00ffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.45);
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.slide.is-active {
+  z-index: 20;
+  pointer-events: auto;
+}
+
+.slide.is-prev,
+.slide.is-next {
+  z-index: 15;
+}
+
+.slide__content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.slide__figure {
+  z-index: 7;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.5s cubic-bezier(.19,1,.22,1);
+}
+
+.is-sliding .slide__figure {
+  transform: scale(0.8);
+  transition: transform 0.5s cubic-bezier(.19,1,.22,1);
+}
+
+.slide__img {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 0%;
+  width: 100%;
+  filter: grayscale(0%);
+  transition: height 1s 1.4s cubic-bezier(.19,1,.22,1), filter 0.4s 0.1s ease;
+}
+
+.slide.is-active .slide__img {
+  height: 100%;
+  transition: height .5s .3s cubic-bezier(.77,0,.175,1), filter 0.4s 0.1s ease;
+}
+
+.is-sliding .slide__img {
+  filter: grayscale(100%);
+}
+
+.slide__bg-fixed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.slide__header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  text-align: center;
+  width: 90%;
+  max-width: 950px;
+}
+
+.slide__title {
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  font-size: clamp(3rem, 7.5vw, 7.5rem);
+  line-height: 0.95;
+  margin: 0;
+}
+
+.title-line {
+  display: block;
+  overflow: hidden;
+}
+
+.title-line span {
+  display: block;
+  transform: translateY(100%);
+  transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.slide.is-active .title-line span {
+  transform: translateY(0);
+  transition-delay: 0.6s;
+}
+
+.slide__subtitle {
+  margin-top: 28px;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1), transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.slide.is-active .slide__subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.9s;
+}
+
+/* Custom Sketch Animations */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+@keyframes floatMedium {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-3deg); }
+}
+@keyframes floatFast {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(2deg); }
+}
+@keyframes pulseSlow {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.25; }
+}
+.animate-float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+.animate-float-medium {
+  animation: floatMedium 6s ease-in-out infinite;
+}
+.animate-float-fast {
+  animation: floatFast 4s ease-in-out infinite;
+}
+.animate-pulse-slow {
+  animation: pulseSlow 5s ease-in-out infinite;
+}
+
+/* Dynamic Sketch Theme Coloring */
+.theme-sketch {
+  transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+[data-theme="dark"] .theme-sketch {
+  filter: invert(1) brightness(2); /* Smooth white inversion */
+}
+[data-theme="beige"] .theme-sketch {
+  filter: invert(0); /* Normal black */
+}
+
+/* Butterfly wing flap animation */
+@keyframes flap {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.2); }
+}
+.animate-flap {
+  animation: flap 0.3s ease-in-out infinite;
+}
+

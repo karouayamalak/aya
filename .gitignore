@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local recordings and scratch files
+*.mp4
+scratch_page*.html
+scratch_styles*.css
+scratch/
+

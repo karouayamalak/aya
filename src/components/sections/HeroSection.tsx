@@ -11,7 +11,7 @@ const slides = [
   {
     titleLine1: "Hi, I'm",
     titleLine2: "Aya Karou",
-    subtitle: "Hey, I'm Aya! I'm a 19-year-old frontend developer and a 2CP computer science student at ESTIN (École Supérieure en Sciences et Technologies de l'Informatique et du Numérique), hailing from Bouira, Algeria.",
+    subtitle: "Hey, I'm Aya! I'm a 20 year old frontend developer and a 2CP computer science student at ESTIN (École Supérieure en Sciences et Technologies de l'Informatique et du Numérique), hailing from Bouira, Algeria.",
     glowColor: "#ffffff",
     image: "/butterfly_sketch.png"
   },
@@ -234,8 +234,8 @@ export default function HeroSection() {
               key={i}
               onClick={() => handleGoToSlide(i)}
               className={`rounded-full transition-all duration-300 cursor-pointer ${i === activeIndex
-                  ? "w-5 h-1.5 bg-white" // White active dot
-                  : "w-1.5 h-1.5 bg-white/20 hover:bg-white/45" // White translucent inactive dots
+                ? "w-5 h-1.5 bg-white" // White active dot
+                : "w-1.5 h-1.5 bg-white/20 hover:bg-white/45" // White translucent inactive dots
                 }`}
               aria-label={`Go to slide ${i + 1}`}
             />

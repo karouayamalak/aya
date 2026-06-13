@@ -11,14 +11,14 @@ const slides = [
   {
     titleLine1: "Hi, I'm",
     titleLine2: "Aya Karou",
-    subtitle: "A 20-year-old creative frontend developer with an artistic touch — building beautiful, interactive web experiences that feel alive.",
+    subtitle: "Hey, I'm Aya! I'm a 19-year-old frontend developer and a 2CP computer science student at ESTIN (École Supérieure en Sciences et Technologies de l'Informatique et du Numérique), hailing from Bouira, Algeria.",
     glowColor: "#ffffff",
     image: "/butterfly_sketch.png"
   },
   {
     titleLine1: "Front-end",
     titleLine2: "Developer",
-    subtitle: "Deeply interested in back-end technologies, databases, and automating development workflows.",
+    subtitle: "My entry into web development in the summer of 2025 changed everything. It ceased being just a hobby and became my daily creative outlet — a lifestyle centered around rapid growth and continuous execution.",
     glowColor: "#ffffff",
     image: "/butterfly_sketch.png"
   },

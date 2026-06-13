@@ -7,9 +7,11 @@ import SmoothScrollProvider from "../components/SmoothScrollProvider";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import BackgroundController from "../components/BackgroundController";
+import SectionReveal from "../components/SectionReveal";
 import HeroSection from "../components/sections/HeroSection";
 import OnlineSection from "../components/sections/OnlineSection";
 import AgenticSection from "../components/sections/AgenticSection";
+import GitHubSection from "../components/sections/GitHubSection";
 import RetailSection from "../components/sections/RetailSection";
 import CheckoutSection from "../components/sections/CheckoutSection";
 import PremiumCTA from "../components/sections/PremiumCTA";
@@ -28,11 +30,10 @@ export default function Home() {
         trigger: "main",
         start: "top top",
         end: "bottom bottom",
-        scrub: 3.5, // Smooth scrubbing - makes flight move slower and floatier
+        scrub: 3.5,
       }
     });
 
-    // Animate fixed positions relative to viewport, rotation, and scale for flying effect
     tl.to("#green-butterfly", { left: "85%", top: "35%", rotation: 40, ease: "power1.inOut" })
       .to("#green-butterfly", { left: "10%", top: "60%", rotation: -35, ease: "power1.inOut" })
       .to("#green-butterfly", { left: "90%", top: "25%", rotation: 20, ease: "power1.inOut" })
@@ -44,7 +45,6 @@ export default function Home() {
 
   return (
     <>
-
       <SmoothScrollProvider>
         {/*
          * DOCUMENT FLOW ARCHITECTURE
@@ -91,35 +91,40 @@ export default function Home() {
           {/* Scroll story — all sections in document flow */}
           <main className="relative w-full flex flex-col">
 
-            {/* ── Hero (beige) ───────────────────────────────────────── */}
+            {/* ── Hero (pinned slider) — no reveal wrapper, it's already animated ── */}
             <div className="relative" style={{ zIndex: 10 }}>
               <HeroSection />
             </div>
 
-            {/* ── Ch. II  Projects (dark) ───────────────────────────── */}
-            <div className="relative" style={{ zIndex: 20 }}>
+            {/* ── Ch. II  Projects ──────────────────────────────────────────────── */}
+            <SectionReveal className="relative" style={{ zIndex: 20 }}>
               <OnlineSection />
-            </div>
+            </SectionReveal>
 
-            {/* ── Ch. III  Experience (dark) ────────────────────────── */}
-            <div className="relative" style={{ zIndex: 30 }}>
+            {/* ── Ch. III  Experience ───────────────────────────────────────────── */}
+            <SectionReveal className="relative" style={{ zIndex: 30 }}>
               <AgenticSection />
-            </div>
+            </SectionReveal>
 
-            {/* ── Ch. IV  Tech Stack (dark, compact) ───────────────── */}
-            <div className="relative" style={{ zIndex: 40 }}>
+            {/* ── Ch. III.V  GitHub Activity ────────────────────────────────────── */}
+            <SectionReveal className="relative" style={{ zIndex: 35 }}>
+              <GitHubSection />
+            </SectionReveal>
+
+            {/* ── Ch. IV  Tech Stack ────────────────────────────────────────────── */}
+            <SectionReveal className="relative" style={{ zIndex: 40 }}>
               <RetailSection />
-            </div>
+            </SectionReveal>
 
-            {/* ── Ch. V  Feedback (beige) ──────────────────────────── */}
-            <div className="relative" style={{ zIndex: 50 }}>
+            {/* ── Ch. V  Feedback ───────────────────────────────────────────────── */}
+            <SectionReveal className="relative" style={{ zIndex: 50 }}>
               <CheckoutSection />
-            </div>
+            </SectionReveal>
 
-            {/* ── Ch. VI  Contact + Footer (dark) ──────────────────── */}
-            <div className="relative" style={{ zIndex: 60 }}>
+            {/* ── Ch. VI  Contact + Footer ──────────────────────────────────────── */}
+            <SectionReveal className="relative" style={{ zIndex: 60 }}>
               <PremiumCTA />
-            </div>
+            </SectionReveal>
 
           </main>
         </div>

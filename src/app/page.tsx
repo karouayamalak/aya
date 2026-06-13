@@ -11,7 +11,7 @@ import SectionReveal from "../components/SectionReveal";
 import HeroSection from "../components/sections/HeroSection";
 import OnlineSection from "../components/sections/OnlineSection";
 import AgenticSection from "../components/sections/AgenticSection";
-import GitHubSection from "../components/sections/GitHubSection";
+
 import RetailSection from "../components/sections/RetailSection";
 import CheckoutSection from "../components/sections/CheckoutSection";
 import PremiumCTA from "../components/sections/PremiumCTA";
@@ -106,10 +106,7 @@ export default function Home() {
               <AgenticSection />
             </SectionReveal>
 
-            {/* ── Ch. III.V  GitHub Activity ────────────────────────────────────── */}
-            <SectionReveal className="relative" style={{ zIndex: 35 }}>
-              <GitHubSection />
-            </SectionReveal>
+
 
             {/* ── Ch. IV  Tech Stack ────────────────────────────────────────────── */}
             <SectionReveal className="relative" style={{ zIndex: 40 }}>

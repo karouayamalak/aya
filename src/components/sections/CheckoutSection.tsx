@@ -17,12 +17,7 @@ interface Recommendation {
   created_at: string;
 }
 
-const PRESET_AVATARS = [
-  { id: "1", label: "A", url: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120&h=120" },
-  { id: "2", label: "B", url: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=120&h=120" },
-  { id: "3", label: "C", url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=120&h=120" },
-  { id: "4", label: "D", url: "https://images.unsplash.com/photo-1628157582853-a796fa650a6a?auto=format&fit=crop&q=80&w=120&h=120" },
-];
+
 
 /* ─── Stars ─────────────────────────────────────────────────────────────────── */
 function Stars({ rating, interactive = false, onChange }: { rating: number; interactive?: boolean; onChange?: (n: number) => void }) {
@@ -59,7 +54,7 @@ export default function CheckoutSection() {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [comment, setComment] = useState("");
-  const [avatar, setAvatar] = useState(PRESET_AVATARS[0].url);
+  const [avatar, setAvatar] = useState("");
   const [rating, setRating] = useState(5);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -139,7 +134,7 @@ export default function CheckoutSection() {
       setRecs((prev) => [newRec, ...prev]);
       setSuccess(true);
       setName(""); setRole(""); setComment("");
-      setAvatar(PRESET_AVATARS[0].url); setRating(5);
+      setAvatar(""); setRating(5);
       setCustomAvatar(null);
       setTimeout(() => setSuccess(false), 4000);
     } catch {
@@ -229,39 +224,24 @@ export default function CheckoutSection() {
                 />
               </div>
 
-              {/* Avatar picker & Custom PFP upload */}
+              {/* Avatar upload */}
               <div>
-                <label className="text-white/40 text-[10px] uppercase tracking-wider block mb-2" style={{ fontFamily: "var(--font-inter)" }}>Pick or upload avatar</label>
-                <div className="flex items-center gap-2 flex-wrap">
-                  {PRESET_AVATARS.map((p) => (
-                    <button
-                      key={p.id}
-                      type="button"
-                      onClick={() => setAvatar(p.url)}
-                      className={`w-8 h-8 rounded-full overflow-hidden border-2 transition-all cursor-pointer ${avatar === p.url ? "border-white scale-110" : "border-transparent opacity-50 hover:opacity-80"}`}
-                    >
-                      <img src={p.url} alt={p.label} className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-
-                  {/* Custom uploaded PFP */}
+                <label className="text-white/40 text-[10px] uppercase tracking-wider block mb-2" style={{ fontFamily: "var(--font-inter)" }}>Upload avatar (optional)</label>
+                <div className="flex items-center gap-3">
+                  {/* Preview */}
                   {customAvatar && (
-                    <button
-                      type="button"
-                      onClick={() => setAvatar(customAvatar)}
-                      className={`w-8 h-8 rounded-full overflow-hidden border-2 transition-all cursor-pointer ${avatar === customAvatar ? "border-white scale-110" : "border-transparent opacity-50 hover:opacity-80"}`}
-                    >
-                      <img src={customAvatar} alt="Custom" className="w-full h-full object-cover" />
-                    </button>
+                    <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-white/30 shrink-0">
+                      <img src={customAvatar} alt="Your avatar" className="w-full h-full object-cover" />
+                    </div>
                   )}
-
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="w-8 h-8 rounded-full border-2 border-dashed border-white/20 hover:border-white/45 flex items-center justify-center text-white/50 hover:text-white transition-all cursor-pointer text-xs font-semibold"
-                    title="Upload custom PFP"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-dashed border-white/20 hover:border-white/45 text-white/50 hover:text-white transition-all cursor-pointer text-xs font-medium"
+                    style={{ fontFamily: "var(--font-inter)" }}
                   >
-                    +
+                    <span className="text-base leading-none">↑</span>
+                    {customAvatar ? "Change photo" : "Upload photo"}
                   </button>
                   <input
                     type="file"

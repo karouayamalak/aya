@@ -4,21 +4,21 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Aya Karou — Creative Frontend Developer",
   description:
-    "Portfolio of Aya Karou, a 20-year-old creative frontend developer and ESTIN student. Specializing in interactive UI, GSAP animations, React/Next.js, and beautiful web experiences.",
-  keywords: ["Aya Karou", "frontend developer", "React", "Next.js", "GSAP", "portfolio", "ESTIN", "Algeria"],
+    "Hey, I'm Aya! I'm a 19-year-old frontend developer and a 2CP computer science student at ESTIN (École Supérieure en Sciences et Technologies de l'Informatique et du Numérique), hailing from Bouira, Algeria. My entry into web development in the summer of 2025 changed everything.",
+  keywords: ["Aya Karou", "frontend developer", "React", "Next.js", "GSAP", "portfolio", "ESTIN", "Algeria", "Bouira"],
   authors: [{ name: "Aya Karou", url: "mailto:a_karou@estin.dz" }],
   openGraph: {
-    title: "Aya Karou — Creative Frontend Developer",
+    title: "Aya Karou ",
     description:
-      "Portfolio of Aya Karou, a passionate frontend developer crafting interactive, motion-rich web experiences with React, GSAP, and Next.js.",
+      "Hey, I'm Aya! I'm a 19-year-old frontend developer and a 2CP CS student at ESTIN, from Bouira, Algeria. My entry into web development in the summer of 2025 changed everything — it became my daily creative outlet.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aya Karou — Creative Frontend Developer",
+    title: "Aya Karou",
     description:
-      "Crafting interactive, motion-rich web experiences with React, GSAP, and Next.js.",
+      "19-year-old frontend developer & 2CP CS student at ESTIN, Algeria. Web dev since summer 2025 — now my daily creative lifestyle.",
   },
   robots: {
     index: true,

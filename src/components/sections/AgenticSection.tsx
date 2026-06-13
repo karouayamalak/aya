@@ -201,9 +201,9 @@ export default function AgenticSection() {
                         key={tag}
                         className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
                         style={{
-                          background: m.accent + "18",
-                          color: m.accent,
-                          border: `1px solid ${m.accent}30`,
+                          background: "rgba(255,255,255,0.92)",
+                          color: "#000000",
+                          border: `1px solid rgba(255,255,255,0.4)`,
                           fontFamily: "var(--font-inter)",
                         }}
                       >

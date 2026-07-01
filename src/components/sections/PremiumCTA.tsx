@@ -143,7 +143,7 @@ export default function PremiumCTA() {
       ref={containerRef}
       id="contact"
       data-chapter="contact"
-      className="relative w-full py-24 md:py-32 flex flex-col justify-center bg-transparent text-white z-[70]"
+      className="relative w-full min-h-screen py-16 md:py-20 flex flex-col justify-center bg-transparent text-white z-[70]"
     >
       {/* Atmospheric backdrop glow */}
       <div

@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
  * Light sections → warm beige        → WebGL starfield HIDDEN
  */
 const SECTION_THEMES: Record<string, { bg: string; dark: boolean }> = {
-  hero:       { bg: "#000000", dark: true  },
+  hero:       { bg: "#f4f1ea", dark: false },
   projects:   { bg: "#0a0a0c", dark: true  },
   experience: { bg: "#08080a", dark: true  },
   stack:      { bg: "#0a0a0c", dark: true  },

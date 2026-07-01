@@ -93,7 +93,7 @@ export default function RetailSection() {
       ref={sectionRef}
       id="stack"
       data-chapter="stack"
-      className="relative w-full py-14 md:py-20 bg-transparent text-white z-50 overflow-hidden"
+      className="relative w-full min-h-screen py-16 md:py-20 flex flex-col justify-center bg-transparent text-white z-50"
       aria-label="Tech Stack chapter"
     >
       {/* Subtle background glow */}
@@ -116,7 +116,7 @@ export default function RetailSection() {
       </div>
 
       {/* Section header */}
-      <div className="w-full px-6 md:px-24 max-w-7xl mx-auto mb-8 relative z-10">
+      <div className="w-full px-6 md:px-24 max-w-7xl mx-auto mb-4 relative z-10">
         <div ref={headRef}>
           <span
             className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-1.5"

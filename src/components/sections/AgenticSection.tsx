@@ -77,7 +77,7 @@ export default function AgenticSection() {
       ref={sectionRef}
       id="experience"
       data-chapter="experience"
-      className="relative w-full min-h-screen py-24 md:py-32 flex flex-col justify-center bg-transparent text-white z-40 overflow-hidden"
+      className="relative w-full min-h-screen py-16 md:py-20 flex flex-col justify-center bg-transparent text-white z-40"
       aria-label="Experience chapter"
     >
       {/* Ambient glow blobs */}
@@ -113,32 +113,32 @@ export default function AgenticSection() {
       <div className="w-full px-6 md:px-24 max-w-7xl mx-auto relative z-10">
 
         {/* ── Section Header ────────────────────────────────── */}
-        <div ref={headRef} className="mb-12 md:mb-20">
+        <div ref={headRef} className="mb-6 md:mb-8">
           <span
-            className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-3"
+            className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-2"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Chapter III — Milestones
           </span>
           <h2
-            className="text-white text-5xl md:text-7xl font-normal leading-[1.05]"
+            className="text-white text-4xl md:text-5xl font-normal leading-[1.05]"
             style={{ fontFamily: "var(--font-playfair)", fontStyle: "italic" }}
           >
             Experience
           </h2>
           <p
-            className="text-white/50 text-sm md:text-base max-w-lg mt-4 leading-relaxed"
+            className="text-white/50 text-xs md:text-sm max-w-lg mt-2 leading-relaxed"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
           >
-            My learning path — from crafting pixel-perfect frontends to shipping full-stack applications and automation systems.
+            My learning path — from crafting frontends to shipping automation systems.
           </p>
         </div>
 
         {/* ── Two-column: Timeline + Terminal ──────────────── */}
-        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-start mb-14 md:mb-20">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-10 items-start mb-6 md:mb-8">
 
           {/* Vertical timeline */}
-          <div ref={timelineRef} className="relative flex flex-col gap-10 pl-0">
+          <div ref={timelineRef} className="relative flex flex-col gap-5 pl-0">
 
             {milestones.map((m, i) => (
               <div
@@ -149,7 +149,7 @@ export default function AgenticSection() {
 
                 {/* Card */}
                 <div
-                  className="hover-shine-wrapper rounded-2xl p-5 transition-all duration-300 group cursor-default"
+                  className="hover-shine-wrapper rounded-2xl p-4 transition-all duration-300 group cursor-default"
                   style={{
                     background: m.active ? `${m.accent}08` : "rgba(255,255,255,0.04)",
                     backdropFilter: "blur(14px)",
@@ -184,13 +184,13 @@ export default function AgenticSection() {
                     {m.period}
                   </span>
                   <h3
-                    className="text-white text-xl md:text-2xl font-semibold mb-3 leading-tight"
+                    className="text-white text-lg md:text-xl font-semibold mb-2 leading-tight"
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
                     {m.title}
                   </h3>
                   <p
-                    className="text-white/55 text-sm leading-relaxed mb-4"
+                    className="text-white/55 text-xs leading-relaxed mb-3"
                     style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
                   >
                     {m.body}

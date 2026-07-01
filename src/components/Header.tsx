@@ -133,11 +133,7 @@ export default function Header() {
           </a>
           <button
             onClick={() => scrollToSection("contact")}
-            className={`text-[12px] font-semibold px-4 py-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-              isLight
-                ? "bg-black text-white hover:bg-black/80"
-                : "bg-white text-black hover:bg-white/90"
-            }`}
+            className="text-[12px] font-semibold px-4 py-1.5 rounded-full bg-white text-black border border-black/10 hover:bg-zinc-100 transition-all duration-300 cursor-pointer"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Hire me

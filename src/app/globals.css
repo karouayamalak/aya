@@ -514,13 +514,13 @@ nav[aria-label="Chapter navigation"] a {
   }
 }
 
-/* ─── SliceSlider Styles (Dark Adaptations with Cyan Accents) ──────────── */
+/* ─── SliceSlider Styles (Beige Theme) ──────────── */
 .slides {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #000000;
+  background: transparent;
 }
 
 .slides-nav {
@@ -543,9 +543,9 @@ nav[aria-label="Chapter navigation"] a {
 }
 
 .slides-nav__nav button {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  color: rgba(0, 0, 0, 0.7);
   padding: 12px 28px;
   font-family: var(--font-sans);
   font-size: 11px;
@@ -559,11 +559,11 @@ nav[aria-label="Chapter navigation"] a {
 }
 
 .slides-nav__nav button:hover {
-  background: #00ffff;
-  color: #000;
-  border-color: #00ffff;
+  background: #b89e81;
+  color: #fff;
+  border-color: #b89e81;
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.45);
+  box-shadow: 0 4px 20px rgba(184, 158, 129, 0.4);
 }
 
 .slide {
@@ -653,7 +653,7 @@ nav[aria-label="Chapter navigation"] a {
 }
 
 .slide__title {
-  color: #ffffff;
+  color: #000000;
   font-family: var(--font-sans);
   font-weight: 800;
   text-transform: uppercase;
@@ -681,7 +681,7 @@ nav[aria-label="Chapter navigation"] a {
 
 .slide__subtitle {
   margin-top: 28px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.75);
   font-family: var(--font-sans);
   font-weight: 300;
   font-size: clamp(1rem, 1.8vw, 1.4rem);

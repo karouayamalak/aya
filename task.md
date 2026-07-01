@@ -1,0 +1,4 @@
+- [x] Modify HeroSection.tsx to update slides to use the processed butterflies
+- [x] Modify HeroSection.tsx to add the user's photo background on Slide 0
+- [x] Modify HeroSection.tsx to transition the right sketch on active state
+- [/] Verify visual presentation using browser subagent

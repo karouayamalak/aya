@@ -115,7 +115,7 @@ export default function OnlineSection() {
       ref={sectionRef}
       id="projects"
       data-chapter="projects"
-      className="relative w-full min-h-screen py-24 md:py-32 flex flex-col justify-center bg-transparent text-white z-30 overflow-hidden"
+      className="relative w-full min-h-screen py-16 md:py-20 flex flex-col justify-center bg-transparent text-white z-30"
       aria-label="Projects chapter"
     >
       {/* Ambient glow */}
@@ -143,20 +143,20 @@ export default function OnlineSection() {
       <div className="w-full px-6 md:px-24 max-w-7xl mx-auto relative z-10">
 
         {/* ── Header + tabs ───────────────────────────────── */}
-        <div ref={headerRef} className="mb-10 md:mb-14 flex flex-col md:flex-row md:items-end gap-6 md:gap-0 md:justify-between">
+        <div ref={headerRef} className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-end gap-3 md:gap-0 md:justify-between">
           <div>
             <span
-              className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-3"
+              className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-2"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Chapter II — Engineering
             </span>
             <h2
-              className="text-white text-5xl md:text-7xl font-normal leading-[1.05] flex items-center gap-4 flex-wrap"
+              className="text-white text-4xl md:text-5xl font-normal leading-[1.05] flex items-center gap-3 flex-wrap"
               style={{ fontFamily: "var(--font-playfair)", fontStyle: "italic" }}
             >
               Projects
-              <img src="/cat_sketch.png" alt="" className="w-32 h-32 md:w-48 md:h-48 object-contain inline-block flex-shrink-0 theme-sketch translate-y-[4px]" />
+              <img src="/cat_sketch.png" alt="" className="w-12 h-12 md:w-16 md:h-16 object-contain inline-block flex-shrink-0 theme-sketch translate-y-[2px]" />
             </h2>
             <p
               className="text-white/50 text-sm max-w-md mt-3 leading-relaxed"
@@ -184,12 +184,11 @@ export default function OnlineSection() {
           </div>
         </div>
 
-        {/* ── Glass-panel card grid ───────────────────────── */}
-        <div ref={gridRef} className="grid md:grid-cols-2 gap-5">
+        <div ref={gridRef} className="grid md:grid-cols-2 gap-4">
           {filtered.map((project, i) => (
             <div
               key={project.title}
-              className="project-card glass-panel hover-shine-wrapper group rounded-2xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1.5 cursor-default"
+              className="project-card glass-panel hover-shine-wrapper group rounded-2xl p-4 md:p-5 flex flex-col gap-3 transition-all duration-300 hover:-translate-y-1.5 cursor-default"
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLDivElement;
                 el.style.borderColor = `${project.accent}45`;

@@ -150,7 +150,7 @@ export default function CheckoutSection() {
       ref={sectionRef}
       id="feedback"
       data-chapter="feedback"
-      className="relative w-full min-h-screen py-24 md:py-32 bg-transparent z-60 overflow-hidden"
+      className="relative w-full min-h-screen py-16 md:py-20 flex flex-col justify-center bg-transparent z-60"
       aria-label="Feedback chapter"
       style={{ fontFamily: "var(--font-inter)" }}
     >
@@ -162,7 +162,7 @@ export default function CheckoutSection() {
         <img src="/sparkle_sketch.png" alt="" className="w-full h-full object-contain theme-sketch" />
       </div>
 
-      <div className="w-full px-6 md:px-12 py-10 md:py-16 max-w-7xl mx-auto relative z-10 bg-zinc-950 border border-zinc-800 rounded-3xl shadow-2xl overflow-hidden">
+      <div className="w-full px-6 md:px-12 py-6 md:py-8 max-w-7xl mx-auto relative z-10 bg-zinc-950 border border-zinc-800 rounded-3xl shadow-2xl overflow-hidden">
         {/* Glow behind the dark panel */}
         {/* Glow behind the dark panel */}
         <div className="absolute inset-0 pointer-events-none opacity-20" style={{ background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%)" }} />
@@ -174,7 +174,7 @@ export default function CheckoutSection() {
 
 
         {/* ── Header ──────────────────────────────────────────────────────────── */}
-        <div className="mb-12 relative z-10">
+        <div className="mb-6 relative z-10">
           <span className="text-white/40 text-[11px] uppercase tracking-[0.2em] block mb-2" style={{ fontFamily: "var(--font-inter)" }}>
             Chapter V — Feedback
           </span>
@@ -296,7 +296,7 @@ export default function CheckoutSection() {
           </div>
 
           {/* ── Right: Scrollable feed ───────────────────────────────────────── */}
-          <div ref={feedRef} className="lg:col-span-3 flex flex-col gap-4 max-h-[560px] overflow-y-auto pr-1">
+          <div ref={feedRef} className="lg:col-span-3 flex flex-col gap-4 max-h-[560px] overflow-y-auto pr-1" data-lenis-prevent>
             <div className="flex items-center justify-between mb-1">
               <h3 className="text-white text-sm font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
                 Recommendations

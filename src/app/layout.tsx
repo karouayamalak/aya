@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Aya Karou — Creative Frontend Developer",
+  title: "Aya Karou — Junior Full-Stack Developer",
   description:
-    "Hey, I'm Aya! I'm a 19-year-old frontend developer and a 2CP computer science student at ESTIN (École Supérieure en Sciences et Technologies de l'Informatique et du Numérique), hailing from Bouira, Algeria. My entry into web development in the summer of 2025 changed everything.",
-  keywords: ["Aya Karou", "frontend developer", "React", "Next.js", "GSAP", "portfolio", "ESTIN", "Algeria", "Bouira"],
+    "Hi, I'm Aya! I'm a 20-year-old junior full-stack developer and a 1CS computer science student at ESTIN (École Supérieure en Sciences et Technologies de l'Informatique et du Numérique), hailing from Bouira, Algeria. I build premium web experiences with React, Next.js, Node.js, and GSAP.",
+  keywords: ["Aya Karou", "junior full stack developer", "frontend developer", "backend developer", "React", "Next.js", "GSAP", "portfolio", "ESTIN", "Algeria", "Bouira"],
   authors: [{ name: "Aya Karou", url: "mailto:a_karou@estin.dz" }],
   openGraph: {
-    title: "Aya Karou ",
+    title: "Aya Karou",
     description:
-      "Hey, I'm Aya! I'm a 19-year-old frontend developer and a 2CP CS student at ESTIN, from Bouira, Algeria. My entry into web development in the summer of 2025 changed everything — it became my daily creative outlet.",
+      "Hi, I'm Aya! I'm a 20-year-old junior full-stack developer and 1CS CS student at ESTIN, from Bouira, Algeria. Building premium web experiences since summer 2025.",
     type: "website",
     locale: "en_US",
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Aya Karou",
     description:
-      "19-year-old frontend developer & 2CP CS student at ESTIN, Algeria. Web dev since summer 2025 — now my daily creative lifestyle.",
+      "20-year-old junior full-stack developer & 1CS CS student at ESTIN, Algeria. Web dev since summer 2025 — now my daily creative lifestyle.",
   },
   robots: {
     index: true,

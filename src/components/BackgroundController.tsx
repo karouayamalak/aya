@@ -12,11 +12,11 @@ gsap.registerPlugin(ScrollTrigger);
  * Light sections → warm beige        → WebGL starfield HIDDEN
  */
 const SECTION_THEMES: Record<string, { bg: string; dark: boolean }> = {
-  hero:       { bg: "#f4f1ea", dark: false },
+  hero:       { bg: "#000000", dark: true  },
   projects:   { bg: "#0a0a0c", dark: true  },
-  experience: { bg: "#08080a", dark: true  },
+  experience: { bg: "#f4f1ea", dark: false },
   stack:      { bg: "#0a0a0c", dark: true  },
-  feedback:   { bg: "#f4f1ea", dark: false },
+  feedback:   { bg: "#000000", dark: true  },
   contact:    { bg: "#000000", dark: true  },
 };
 
@@ -33,8 +33,8 @@ export default function BackgroundController() {
 
       const st = ScrollTrigger.create({
         trigger: section,
-        start:   "top 35%",
-        end:     "bottom 35%",
+        start:   "top 80%",
+        end:     "bottom 20%",
         onEnter:     () => applyTheme(theme, webglEl),
         onEnterBack: () => applyTheme(theme, webglEl),
       });
@@ -62,8 +62,8 @@ function applyTheme(
 
   gsap.to(document.body, {
     backgroundColor: theme.bg,
-    duration: 0.6,
-    ease: "power2.inOut",
+    duration: 1.4,
+    ease: "power1.inOut",
     overwrite: "auto",
   });
 

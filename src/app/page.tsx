@@ -58,7 +58,7 @@ export default function Home() {
          *   WebGL canvas z-0, sections z-10+, Header/Sidebar z-50+
          */}
         <div
-          className="relative min-h-screen text-white font-sans overflow-x-hidden"
+          className="relative min-h-screen text-white font-sans"
           style={{ WebkitFontSmoothing: "antialiased" }}
         >
 
@@ -102,16 +102,16 @@ export default function Home() {
             </SectionReveal>
 
             {/* ── Ch. III  Experience ───────────────────────────────────────────── */}
-            <SectionReveal className="relative" style={{ zIndex: 30 }}>
+            <div className="relative" style={{ zIndex: 30 }}>
               <AgenticSection />
-            </SectionReveal>
+            </div>
 
 
 
             {/* ── Ch. IV  Tech Stack ────────────────────────────────────────────── */}
-            <SectionReveal className="relative" style={{ zIndex: 40 }}>
+            <div className="relative" style={{ zIndex: 40 }}>
               <RetailSection />
-            </SectionReveal>
+            </div>
 
             {/* ── Ch. V  Feedback ───────────────────────────────────────────────── */}
             <SectionReveal className="relative" style={{ zIndex: 50 }}>

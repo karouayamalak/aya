@@ -10,6 +10,16 @@ gsap.registerPlugin(ScrollTrigger);
 const PROJECTS = [
   {
     date: "2026",
+    title: "Unicare Clinic",
+    desc: "A comprehensive healthcare portal facilitating clinic workflow, doctor searches, appointment booking, and patient records.",
+    category: "Healthcare Portal",
+    stack: ["React", "Next.js", "Tailwind CSS"],
+    type: "fullstack",
+    accent: "#ffffff",
+    url: "https://unicare-clinic-2.vercel.app",
+  },
+  {
+    date: "2026",
     title: "Thazdayth",
     desc: "A full-stack platform built with modern web technologies. Features a responsive design, dynamic content, and seamless user experience.",
     category: "Full Stack App",

@@ -154,6 +154,7 @@ export default function CheckoutSection() {
       aria-label="Feedback chapter"
       style={{ fontFamily: "var(--font-inter)" }}
     >
+
       {/* Decorative hand-drawn sketches */}
       <div className="absolute right-[2%] bottom-[5%] w-44 h-44 md:w-64 md:h-64 pointer-events-none opacity-[0.08] z-0 select-none">
         <img src="/sparkle_sketch.png" alt="" className="w-full h-full object-contain theme-sketch" />
@@ -162,37 +163,36 @@ export default function CheckoutSection() {
         <img src="/sparkle_sketch.png" alt="" className="w-full h-full object-contain theme-sketch" />
       </div>
 
-      <div className="w-full px-6 md:px-12 py-6 md:py-8 max-w-7xl mx-auto relative z-10 bg-zinc-950 border border-zinc-800 rounded-3xl shadow-2xl overflow-hidden">
-        {/* Glow behind the dark panel */}
+      <div className="w-full px-4 sm:px-6 md:px-12 py-6 md:py-8 max-w-7xl mx-auto relative z-10 bg-zinc-950 border border-zinc-800 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
         {/* Glow behind the dark panel */}
         <div className="absolute inset-0 pointer-events-none opacity-20" style={{ background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%)" }} />
 
         {/* Small botanical sketch illustrations placed in random spots */}
-        <div className="absolute bottom-[6%] right-[3%] w-[74px] h-[74px] md:w-[86px] md:h-[86px] pointer-events-none opacity-85 z-20 select-none -rotate-12 transition-transform duration-500 hover:scale-110">
+        <div className="absolute bottom-[6%] right-[3%] w-[60px] h-[60px] md:w-[86px] md:h-[86px] pointer-events-none opacity-85 z-20 select-none -rotate-12 transition-transform duration-500 hover:scale-110">
           <img src="/processed/6a755a4070816daea2c843b17c8497c4.jpg" alt="" className="w-full h-full object-contain" />
         </div>
 
 
         {/* ── Header ──────────────────────────────────────────────────────────── */}
         <div className="mb-6 relative z-10">
-          <span className="text-white/40 text-[11px] uppercase tracking-[0.2em] block mb-2" style={{ fontFamily: "var(--font-inter)" }}>
-            Chapter V — Feedback
+          <span className="text-white/40 text-[11px] uppercase tracking-[0.2em] block mb-2 font-medium" style={{ fontFamily: "var(--font-inter)" }}>
+            Chapter VI — Feedback
           </span>
-          <h2 className="text-white text-5xl md:text-6xl font-normal leading-tight" style={{ fontFamily: "var(--font-playfair)", fontStyle: "italic" }}>
+          <h2 className="text-white text-3xl sm:text-4xl md:text-6xl font-normal leading-tight" style={{ fontFamily: "var(--font-playfair)", fontStyle: "italic" }}>
             What people say
           </h2>
-          <p className="text-white/60 text-sm mt-3 max-w-md leading-relaxed" style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}>
+          <p className="text-white/60 text-xs sm:text-sm mt-3 max-w-md leading-relaxed" style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}>
             Real recommendations from people I&apos;ve worked with. Leave yours below — it takes 30 seconds.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
+        <div className="grid lg:grid-cols-5 gap-6 sm:gap-8 items-start">
 
           {/* ── Left: Submit form ────────────────────────────────────────────── */}
           <div ref={formRef} className="lg:col-span-2">
             <form
               onSubmit={handleSubmit}
-              className="rounded-2xl p-6 flex flex-col gap-4 bg-zinc-900/40 border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.2)]"
+              className="rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col gap-4 bg-zinc-900/40 border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.2)]"
             >
               <h3 className="text-white text-sm font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
                 Leave a recommendation

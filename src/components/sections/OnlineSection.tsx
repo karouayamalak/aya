@@ -68,11 +68,22 @@ const PROJECTS = [
     accent: "#ffffff",
     url: "https://focusly-mnw4-ten.vercel.app",
   },
+  {
+    date: "2026",
+    title: "Bylka Bio",
+    desc: "A bespoke client freelance web platform featuring interactive storytelling, rich animations, and an organic product ecosystem.",
+    category: "Freelance Project",
+    stack: ["React", "Node.js", "GSAP", "Tailwind CSS"],
+    type: "freelance",
+    accent: "#ffffff",
+    url: "https://bylka-bio.onrender.com",
+  },
 ];
 
 const TABS = [
   { id: "fullstack", label: "Full Stack" },
   { id: "frontend", label: "Frontend Only" },
+  { id: "freelance", label: "Freelance" },
 ] as const;
 
 type TabId = typeof TABS[number]["id"];
@@ -128,15 +139,6 @@ export default function OnlineSection() {
       className="relative w-full min-h-screen py-16 md:py-20 flex flex-col justify-center bg-transparent text-white z-30"
       aria-label="Projects chapter"
     >
-      {/* Ambient glow */}
-      <div
-        className="absolute top-0 left-0 w-[600px] h-[600px] pointer-events-none opacity-10 z-0"
-        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 65%)" }}
-      />
-      <div
-        className="absolute bottom-0 right-0 w-[400px] h-[400px] pointer-events-none opacity-5 z-0"
-        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)" }}
-      />
 
       {/* Decorative hand-drawn sparkle sketch */}
       <div className="absolute right-[5%] top-[8%] w-44 h-44 md:w-64 md:h-64 pointer-events-none opacity-20 z-0 select-none">
@@ -150,23 +152,23 @@ export default function OnlineSection() {
 
 
 
-      <div className="w-full px-6 md:px-24 max-w-7xl mx-auto relative z-10">
+      <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto relative z-10">
 
         {/* ── Header + tabs ───────────────────────────────── */}
         <div ref={headerRef} className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-end gap-3 md:gap-0 md:justify-between">
           <div>
             <span
-              className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-2"
+              className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-2 font-medium"
               style={{ fontFamily: "var(--font-inter)" }}
             >
-              Chapter II — Engineering
+              Chapter III — Engineering
             </span>
             <h2
-              className="text-white text-4xl md:text-5xl font-normal leading-[1.05] flex items-center gap-3 flex-wrap"
+              className="text-white text-3xl sm:text-4xl md:text-5xl font-normal leading-[1.05] flex items-center gap-3 flex-wrap"
               style={{ fontFamily: "var(--font-playfair)", fontStyle: "italic" }}
             >
               Projects
-              <img src="/cat_sketch.png" alt="" className="w-12 h-12 md:w-16 md:h-16 object-contain inline-block flex-shrink-0 theme-sketch translate-y-[2px]" />
+              <img src="/cat_sketch.png" alt="" className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 object-contain inline-block flex-shrink-0 theme-sketch translate-y-[2px]" />
             </h2>
             <p
               className="text-white/50 text-sm max-w-md mt-3 leading-relaxed"

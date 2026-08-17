@@ -2,23 +2,37 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Aya Karou — Junior Full-Stack Developer",
+  title: "Aya Karou — Full-Stack MERN Developer & Portfolio Creator",
   description:
-    "Hi, I'm Aya! I'm a 20-year-old junior full-stack developer and a 1CS computer science student at ESTIN (École Supérieure en Sciences et Technologies de l'Informatique et du Numérique), hailing from Bouira, Algeria. I build premium web experiences with React, Next.js, Node.js, and GSAP.",
-  keywords: ["Aya Karou", "junior full stack developer", "frontend developer", "backend developer", "React", "Next.js", "GSAP", "portfolio", "ESTIN", "Algeria", "Bouira"],
+    "Hi, I'm Aya! A 20-year-old Full-Stack MERN developer and 1CS CS student at ESTIN, Algeria. I build bespoke, high-converting portfolio websites, scalable full-stack MERN web applications, and creative interactive experiences.",
+  keywords: [
+    "Aya Karou",
+    "full stack developer",
+    "MERN stack developer",
+    "portfolio creator",
+    "build portfolio website",
+    "React",
+    "Next.js",
+    "Node.js",
+    "MongoDB",
+    "GSAP",
+    "freelance developer",
+    "ESTIN",
+    "Algeria",
+  ],
   authors: [{ name: "Aya Karou", url: "mailto:a_karou@estin.dz" }],
   openGraph: {
-    title: "Aya Karou",
+    title: "Aya Karou — Full-Stack MERN & Portfolio Developer",
     description:
-      "Hi, I'm Aya! I'm a 20-year-old junior full-stack developer and 1CS CS student at ESTIN, from Bouira, Algeria. Building premium web experiences since summer 2025.",
+      "Hi, I'm Aya! Full-Stack MERN developer & portfolio creator. Building custom interactive portfolio experiences & scalable MERN web applications.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aya Karou",
+    title: "Aya Karou — Full-Stack MERN & Portfolio Developer",
     description:
-      "20-year-old junior full-stack developer & 1CS CS student at ESTIN, Algeria. Web dev since summer 2025 — now my daily creative lifestyle.",
+      "Full-stack MERN developer & creative engineer. Building bespoke portfolios and full-stack web applications.",
   },
   robots: {
     index: true,

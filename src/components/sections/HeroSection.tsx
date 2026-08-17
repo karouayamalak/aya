@@ -11,7 +11,7 @@ export default function HeroSection() {
       id="hero"
       data-chapter="hero"
       ref={sectionRef}
-      className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-white"
+      className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-transparent text-white"
     >
       {/* Centered content block */}
       <div
@@ -20,7 +20,7 @@ export default function HeroSection() {
       >
         
         {/* Title / Particle Typography */}
-        <div className="w-full h-[250px] md:h-[350px] flex items-center justify-center">
+        <div className="w-full h-[220px] sm:h-[280px] md:h-[340px] flex items-center justify-center">
           <CursorDrivenParticleTypography
             text="hello, i'm aya"
             fontSize={90}
@@ -35,14 +35,14 @@ export default function HeroSection() {
         </div>
 
         {/* Description & CTAs grouped together */}
-        <div className="flex flex-col items-center gap-6 max-w-lg px-4 mt-2">
+        <div className="flex flex-col items-center gap-6 max-w-lg px-4 mt-1">
           <p
-            className="text-white/60 text-sm md:text-base leading-relaxed font-light"
+            className="text-white/60 text-xs sm:text-sm md:text-base leading-relaxed font-light"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             20-year-old junior full-stack developer · 1CS student at ESTIN · Bouira, Algeria
             <br />
-            Building premium web experiences with React, Next.js & GSAP.
+            Building bespoke portfolios &amp; full-stack MERN web applications.
           </p>
 
           <div className="flex items-center gap-3">
@@ -54,11 +54,11 @@ export default function HeroSection() {
               Explore Projects
             </a>
             <a
-              href="#experience"
+              href="#services"
               className="px-5 py-2.5 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-white text-black hover:bg-white/85 transition-all duration-300"
               style={{ fontFamily: "var(--font-inter)" }}
             >
-              My Journey
+              Services &amp; Freelance
             </a>
           </div>
         </div>

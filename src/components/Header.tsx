@@ -14,14 +14,19 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Watch body background to adapt header style on light sections
+  // Watch body theme to adapt header style on light sections
   useEffect(() => {
+    const updateTheme = () => {
+      const isBeige = document.body.dataset.theme === "beige" || document.body.style.backgroundColor.includes("244") || document.body.style.backgroundColor.includes("f4f1ea");
+      setIsLight(isBeige);
+    };
+
+    updateTheme();
+
     const observer = new MutationObserver(() => {
-      const bg = document.body.style.backgroundColor;
-      // beige bg (#f4f1ea) → switch header to light mode
-      setIsLight(bg.includes("244") || bg.includes("f4f1ea"));
+      updateTheme();
     });
-    observer.observe(document.body, { attributes: true, attributeFilter: ["style"] });
+    observer.observe(document.body, { attributes: true, attributeFilter: ["style", "data-theme"] });
     return () => observer.disconnect();
   }, []);
 
@@ -89,6 +94,7 @@ export default function Header() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-7" aria-label="Main navigation">
           {[
+            { id: "services",   label: "Services" },
             { id: "projects",   label: "Projects" },
             { id: "experience", label: "Experience" },
             { id: "stack",      label: "Stack" },
@@ -162,10 +168,11 @@ export default function Header() {
           isLight
             ? "bg-white/95 border-black/10"
             : "bg-black/95 border-white/10"
-        } ${mobileOpen ? "max-h-80" : "max-h-0"}`}
+        } ${mobileOpen ? "max-h-[500px] py-4" : "max-h-0 py-0"}`}
       >
-        <div className="px-6 py-5 flex flex-col gap-4">
+        <div className="px-6 flex flex-col gap-3">
           {[
+            { id: "services",   label: "Services" },
             { id: "projects",   label: "Projects" },
             { id: "experience", label: "Experience" },
             { id: "stack",      label: "Tech Stack" },
@@ -174,7 +181,7 @@ export default function Header() {
           ].map(({ id, label }) => (
             <button
               key={id}
-              className={`text-lg font-semibold text-left border-b pb-3 cursor-pointer transition-colors ${
+              className={`text-base font-semibold text-left border-b pb-2 cursor-pointer transition-colors ${
                 isLight
                   ? "text-black border-black/10 hover:text-black/60"
                   : "text-white border-white/10 hover:text-white/70"
@@ -187,8 +194,8 @@ export default function Header() {
           ))}
           {/* Social links in mobile menu */}
           <div className="flex items-center gap-4 pt-1">
-            <a href="https://github.com/karouayamalak" target="_blank" rel="noopener noreferrer" className={`text-sm font-medium no-underline transition-colors ${isLight ? "text-black/60" : "text-white/60"}`} style={{ fontFamily: "var(--font-inter)" }}>GitHub</a>
-            <a href="https://www.linkedin.com/in/aya-malak-karou-15a527398" target="_blank" rel="noopener noreferrer" className={`text-sm font-medium no-underline transition-colors ${isLight ? "text-black/60" : "text-white/60"}`} style={{ fontFamily: "var(--font-inter)" }}>LinkedIn</a>
+            <a href="https://github.com/karouayamalak" target="_blank" rel="noopener noreferrer" className={`text-xs font-medium no-underline transition-colors ${isLight ? "text-black/60" : "text-white/60"}`} style={{ fontFamily: "var(--font-inter)" }}>GitHub</a>
+            <a href="https://www.linkedin.com/in/aya-malak-karou-15a527398" target="_blank" rel="noopener noreferrer" className={`text-xs font-medium no-underline transition-colors ${isLight ? "text-black/60" : "text-white/60"}`} style={{ fontFamily: "var(--font-inter)" }}>LinkedIn</a>
           </div>
         </div>
       </div>

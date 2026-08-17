@@ -160,7 +160,7 @@ export function CursorDrivenParticleTypography({
             // Draw text to generate pixel map
             ctx.fillStyle = textColor;
             // Responsive font size based on container width if text is large
-            const effectiveFontSize = Math.min(fontSize, containerWidth * 0.15);
+            const effectiveFontSize = Math.min(fontSize, Math.max(36, containerWidth * 0.16));
             ctx.font = `bold ${effectiveFontSize}px ${fontFamily}`;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
@@ -217,6 +217,13 @@ export function CursorDrivenParticleTypography({
             mouseY = -1000;
         };
 
+        const handleTouch = (e: TouchEvent) => {
+            if (!e.touches[0]) return;
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.touches[0].clientX - rect.left;
+            mouseY = e.touches[0].clientY - rect.top;
+        };
+
         const handleResize = () => {
             init();
         };
@@ -246,19 +253,9 @@ export function CursorDrivenParticleTypography({
 
         canvas.addEventListener("mousemove", handleMouseMove);
         canvas.addEventListener("mouseleave", handleMouseLeave);
-        canvas.addEventListener("touchstart", (e) => {
-            if (!e.touches[0]) return;
-            const rect = canvas.getBoundingClientRect();
-            mouseX = e.touches[0].clientX - rect.left;
-            mouseY = e.touches[0].clientY - rect.top;
-        });
-        canvas.addEventListener("touchmove", (e) => {
-            if (!e.touches[0]) return;
-            const rect = canvas.getBoundingClientRect();
-            mouseX = e.touches[0].clientX - rect.left;
-            mouseY = e.touches[0].clientY - rect.top;
-        });
-        canvas.addEventListener("touchend", handleMouseLeave);
+        canvas.addEventListener("touchstart", handleTouch, { passive: true });
+        canvas.addEventListener("touchmove", handleTouch, { passive: true });
+        canvas.addEventListener("touchend", handleMouseLeave, { passive: true });
 
         return () => {
             clearTimeout(timeoutId);
@@ -266,6 +263,9 @@ export function CursorDrivenParticleTypography({
             themeObserver.disconnect();
             canvas.removeEventListener("mousemove", handleMouseMove);
             canvas.removeEventListener("mouseleave", handleMouseLeave);
+            canvas.removeEventListener("touchstart", handleTouch);
+            canvas.removeEventListener("touchmove", handleTouch);
+            canvas.removeEventListener("touchend", handleMouseLeave);
             cancelAnimationFrame(animationFrameId);
         };
     }, [text, fontSize, fontFamily, particleSize, particleDensity, dispersionStrength, returnSpeed, color]);
@@ -273,7 +273,7 @@ export function CursorDrivenParticleTypography({
     return (
         <div
             ref={containerRef}
-            className={cn("w-full h-full min-h-[400px] flex items-center justify-center relative touch-none", className)}
+            className={cn("w-full h-full min-h-[200px] md:min-h-[320px] flex items-center justify-center relative touch-pan-y", className)}
         >
             <canvas
                 ref={canvasRef}

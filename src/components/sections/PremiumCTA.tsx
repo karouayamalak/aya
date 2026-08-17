@@ -145,12 +145,12 @@ export default function PremiumCTA() {
       data-chapter="contact"
       className="relative w-full min-h-screen py-16 md:py-20 flex flex-col justify-center bg-transparent text-white z-[70]"
     >
-      {/* Atmospheric backdrop glow */}
+      {/* Atmospheric backdrop glow — subtle neutral */}
       <div
         ref={glowRef}
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] pointer-events-none rounded-full filter blur-[100px] z-0"
         style={{
-          background: "radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 50%, transparent 80%)",
+          background: "radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)",
         }}
       />
 
@@ -179,10 +179,10 @@ export default function PremiumCTA() {
         className="w-full px-6 md:px-24 max-w-7xl mx-auto flex flex-col items-center text-center relative z-10"
       >
         <span
-          className="text-white/40 text-xs uppercase tracking-widest block mb-2"
+          className="text-white/40 text-xs uppercase tracking-widest block mb-2 font-medium"
           style={{ fontFamily: "var(--font-inter)" }}
         >
-          Chapter VI — Connections
+          Chapter VII — Connections
         </span>
         <h2
           ref={titleRef}
@@ -195,7 +195,7 @@ export default function PremiumCTA() {
           className="text-white/60 text-xs md:text-sm max-w-xl mb-6 leading-relaxed"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
         >
-          I&apos;m always open to new opportunities, collaborations, and projects. Whether you have an idea, need a frontend developer, or just want to say hello — my inbox is open.
+          I&apos;m always open to new opportunities, freelance projects, and full-stack collaborations. Whether you need a bespoke portfolio, a MERN app, or want to discuss an idea — my inbox is open.
         </p>
 
         {/* Buttons */}
@@ -255,7 +255,7 @@ export default function PremiumCTA() {
               required
               rows={3}
               disabled={contactSubmitting}
-              placeholder="Let's build a custom interactive project..."
+              placeholder="Let's build a custom interactive portfolio or MERN project..."
               value={contactMessage}
               onChange={(e) => setContactMessage(e.target.value)}
               className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors resize-none disabled:opacity-50"
@@ -296,16 +296,16 @@ export default function PremiumCTA() {
             <a href="https://linkedin.com/in/ayakarou" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-[10px] no-underline transition-colors">LinkedIn</a>
           </div>
           <div className="flex flex-col gap-1.5">
-            <h5 className="text-white text-[10px] font-bold uppercase tracking-wider">Tech Stack</h5>
-            <span className="text-white/50 text-[10px]">React &amp; Next.js</span>
-            <span className="text-white/50 text-[10px]">GSAP &amp; Motion</span>
-            <span className="text-white/50 text-[10px]">Python &amp; n8n</span>
+            <h5 className="text-white text-[10px] font-bold uppercase tracking-wider">Services</h5>
+            <span className="text-white/50 text-[10px]">Custom Portfolios</span>
+            <span className="text-white/50 text-[10px]">MERN Full-Stack Apps</span>
+            <span className="text-white/50 text-[10px]">Creative Development</span>
           </div>
           <div className="flex flex-col gap-1.5">
             <h5 className="text-white text-[10px] font-bold uppercase tracking-wider">Education</h5>
             <span className="text-white/50 text-[10px]">ESTIN University</span>
             <span className="text-white/50 text-[10px]">Bac Math — 17/20</span>
-            <span className="text-white/50 text-[10px]">Frontend since 2025</span>
+            <span className="text-white/50 text-[10px]">Full Stack Dev</span>
           </div>
           <div className="flex flex-col gap-2">
             <h5 className="text-white text-[10px] font-bold uppercase tracking-wider">Contact</h5>
@@ -345,7 +345,7 @@ export default function PremiumCTA() {
       </div>
 
       {/* Decorative hand-drawn flower sketches in the bottom corners of the footer (colorful user sketches 4 & 5) */}
-      <div className="absolute left-[1%] bottom-[-10px] w-24 h-24 md:w-36 md:h-36 pointer-events-none opacity-100 z-10 select-none">
+      <div id="target-flower" className="absolute left-[1%] bottom-[-10px] w-24 h-24 md:w-36 md:h-36 pointer-events-none opacity-100 z-10 select-none">
         <img src="/user_sketch_4.png" alt="" className="w-full h-full object-contain" />
       </div>
       <div className="absolute right-[1%] bottom-[-10px] w-24 h-24 md:w-36 md:h-36 pointer-events-none opacity-100 z-10 select-none">

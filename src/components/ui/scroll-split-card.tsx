@@ -66,25 +66,25 @@ export function ScrollSplitCard({
   return (
     <div
       ref={containerRef}
-      className={cn("relative h-[500vh] w-full", className)}
+      className={cn("relative h-[320vh] md:h-[400vh] w-full", className)}
     >
       <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden [perspective:1200px]">
         {/* Starting Text indicator */}
         <motion.div
-          className="absolute top-[20%] left-0 right-0 text-center"
+          className="absolute top-[18%] sm:top-[20%] left-0 right-0 text-center pointer-events-none"
           style={{
             opacity: startTextOpacity,
             y: startTextY,
           }}
         >
-          <p className="text-sm font-medium tracking-widest text-white/50 uppercase">
-            Scroll down
+          <p className="text-xs sm:text-sm font-medium tracking-widest text-white/50 uppercase">
+            Scroll down to explore stack
           </p>
         </motion.div>
 
         <motion.div
           style={{ scale, y: cardsY, transformStyle: "preserve-3d" }}
-          className="flex h-[400px] w-full max-w-4xl px-4 relative"
+          className="flex h-[300px] sm:h-[360px] md:h-[400px] w-full max-w-4xl px-2 sm:px-4 relative"
         >
           {cards.slice(0, 3).map((card, i) => (
             <motion.div
@@ -112,7 +112,7 @@ export function ScrollSplitCard({
                   style={{
                     left: `${-100 * i}%`,
                     backgroundImage: `url(${imageSrc})`,
-                    backgroundSize: "100% 100%",
+                    backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
                 />
@@ -121,7 +121,7 @@ export function ScrollSplitCard({
               {/* Back Side: New Content Card */}
               <motion.div
                 className={cn(
-                  "absolute inset-0 overflow-hidden flex flex-col justify-end p-8 [backface-visibility:hidden] will-change-transform",
+                  "absolute inset-0 overflow-hidden flex flex-col justify-end p-3 sm:p-5 md:p-8 [backface-visibility:hidden] will-change-transform",
                   "border border-white/5 bg-gradient-to-br from-white/10 to-transparent",
                   "shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),inset_0_-24px_48px_rgba(0,0,0,0.2)]"
                 )}
@@ -143,11 +143,11 @@ export function ScrollSplitCard({
                   }}
                 />
 
-                <div className="relative z-10 mb-auto">{card.icon}</div>
-                <h3 className="relative z-10 mb-4 text-2xl font-medium leading-tight">
+                <div className="relative z-10 mb-auto scale-75 sm:scale-90 md:scale-100 origin-top-left">{card.icon}</div>
+                <h3 className="relative z-10 mb-1.5 sm:mb-3 md:mb-4 text-xs sm:text-base md:text-2xl font-bold leading-tight">
                   {card.title}
                 </h3>
-                <p className="relative z-10 text-sm opacity-80">{card.description}</p>
+                <p className="relative z-10 text-[9px] sm:text-xs md:text-sm opacity-85 leading-snug sm:leading-relaxed line-clamp-4 md:line-clamp-none">{card.description}</p>
               </motion.div>
             </motion.div>
           ))}
@@ -155,14 +155,14 @@ export function ScrollSplitCard({
 
         {/* Ending Text fixed in the sticky viewport */}
         <motion.div
-          className="absolute bottom-[20%] left-0 right-0 text-center"
+          className="absolute bottom-[16%] sm:bottom-[20%] left-0 right-0 text-center pointer-events-none"
           style={{
             opacity: textOpacity,
             y: textY,
           }}
         >
-          <p className="text-3xl font-medium tracking-tight text-white/80 font-serif italic">
-            So cool, right?
+          <p className="text-xl sm:text-2xl md:text-3xl font-medium tracking-tight text-white/80 font-serif italic">
+            Engineering elegance in motion
           </p>
         </motion.div>
       </div>

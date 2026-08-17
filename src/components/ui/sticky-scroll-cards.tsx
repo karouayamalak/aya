@@ -36,30 +36,30 @@ function StickyScrollCard({
     // h-screen gives this 100vh of flow height.
     // sticky top-0 pins the card to the viewport top while the container scrolls past.
     // Later cards sit on top via natural DOM stacking order.
-    <div className="sticky top-0 flex h-screen items-center justify-center">
+    <div className="sticky top-0 flex h-screen items-center justify-center px-4">
       <motion.div
         style={{
           scale,
           rotate: rotation,
-          top: `calc(-5vh + ${i * 22 + 110}px)`,
-          borderRadius: 4,
+          top: `calc(-4vh + ${i * 16 + 70}px)`,
+          borderRadius: 8,
           boxShadow:
             "0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.07), 0 12px 32px rgba(0,0,0,0.10), 0 24px 56px rgba(0,0,0,0.08)",
         }}
-        className="relative -top-1/4 origin-top overflow-hidden bg-white"
+        className="relative -top-1/4 origin-top overflow-hidden bg-white max-w-[460px] w-[88vw] border border-black/5"
       >
         {/* 10px border on three sides */}
-        <div className="p-[10px] pb-0">
-          <div className="w-[460px] overflow-hidden">
+        <div className="p-2 sm:p-[10px] pb-0">
+          <div className="w-full overflow-hidden rounded-sm">
             {src && src.trim() !== "" ? (
               <img
                 src={src}
                 alt={title}
-                className="block h-[290px] w-full object-cover"
+                className="block h-[190px] sm:h-[240px] md:h-[290px] w-full object-cover"
                 draggable={false}
               />
             ) : (
-              <div className="h-[290px] w-full bg-zinc-950 flex flex-col items-center justify-center border border-white/5 rounded-sm relative overflow-hidden">
+              <div className="h-[190px] sm:h-[240px] md:h-[290px] w-full bg-zinc-950 flex flex-col items-center justify-center border border-white/5 rounded-sm relative overflow-hidden">
                 <div 
                   className="absolute inset-0 opacity-[0.03] pointer-events-none"
                   style={{
@@ -76,9 +76,9 @@ function StickyScrollCard({
         </div>
 
         {/* Caption strip */}
-        <div className="flex h-[44px] items-center justify-center px-4">
-          <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-400">
-            {title}
+        <div className="flex h-[38px] sm:h-[44px] items-center justify-center px-3 sm:px-4">
+          <p className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-500">
+            {title || "Credential / Certificate"}
           </p>
         </div>
       </motion.div>

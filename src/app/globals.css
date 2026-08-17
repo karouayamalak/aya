@@ -55,8 +55,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Smooth GSAP background color transitions between sections */
-  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  /* background-color is animated exclusively by GSAP in BackgroundController.tsx — no CSS transition here */
 }
 
 /* ─── Subtle grain texture overlay (adds premium depth) ──────────────── */
@@ -149,22 +148,6 @@ body::after {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* ─── Section ambient glow ────────────────────────────────────────────── */
-.section-glow-gold {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(80px);
-  pointer-events: none;
-  background: radial-gradient(circle, rgba(212, 160, 23, 0.3) 0%, transparent 70%);
-}
-
-.section-glow-indigo {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(80px);
-  pointer-events: none;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
-}
 
 /* ─── Hover shine sweep effect ────────────────────────────────────────── */
 .hover-shine-wrapper {
@@ -304,18 +287,14 @@ canvas {
   --text-secondary: rgba(255, 255, 255, 0.55);
 }
 
-/* Smooth transitions for theme switching */
-.text-white,
-[class*="text-white/"],
-.bg-white,
-[class*="bg-white/"],
-.border-white,
-[class*="border-white/"],
-.text-black,
-[class*="text-black/"],
-.bg-black,
-[class*="bg-black/"] {
-  transition: color 0.6s ease, background-color 0.6s ease, border-color 0.6s ease;
+
+/* Smooth text & border color transitions when theme switches (dark ↔ beige).
+   background-color is intentionally excluded — GSAP controls body bg exclusively. */
+[data-theme="beige"] .text-white,
+[data-theme="beige"] [class*="text-white/"],
+[data-theme="beige"] .border-white,
+[data-theme="beige"] [class*="border-white/"] {
+  transition: color 0.5s ease, border-color 0.5s ease;
 }
 
 /* Automatically invert colors on beige backgrounds */
@@ -395,6 +374,68 @@ canvas {
   border-color: rgba(18, 18, 18, 0.2) !important;
 }
 
+[data-theme="beige"] .glass-panel {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="beige"] .glass-panel:hover {
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Ensure Recommendation Section (#feedback) text is ALWAYS crisp white */
+#feedback .text-white,
+[data-theme="beige"] #feedback .text-white {
+  color: #ffffff !important;
+}
+
+#feedback .text-white\/30,
+[data-theme="beige"] #feedback .text-white\/30 {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+#feedback .text-white\/40,
+[data-theme="beige"] #feedback .text-white\/40 {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+#feedback .text-white\/50,
+[data-theme="beige"] #feedback .text-white\/50 {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+#feedback .text-white\/60,
+[data-theme="beige"] #feedback .text-white\/60 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+#feedback .text-white\/70,
+[data-theme="beige"] #feedback .text-white\/70 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+#feedback .text-white\/80,
+[data-theme="beige"] #feedback .text-white\/80 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+#feedback .border-white\/10,
+[data-theme="beige"] #feedback .border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+#feedback .border-white\/20,
+[data-theme="beige"] #feedback .border-white\/20 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+#feedback .bg-white,
+[data-theme="beige"] #feedback .bg-white {
+  background-color: #ffffff !important;
+  color: #09090b !important;
+}
+
 
 /* ─── Pulse animation for live indicators ────────────────────────────── */
 @keyframes live-pulse {
@@ -420,10 +461,6 @@ canvas {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
 }
 
-/* ─── POS device glow ────────────────────────────────────────────────── */
-.pos-glow {
-  box-shadow: 0 0 40px rgba(16, 185, 129, 0.15), 0 30px 60px rgba(0, 0, 0, 0.8);
-}
 
 /* ─── Sidebar mix-blend visibility on both dark and light backgrounds ── */
 nav[aria-label="Chapter navigation"] span,

@@ -98,7 +98,7 @@ export default function AgenticSection() {
       className="relative w-full py-14 md:py-18 flex flex-col justify-center bg-transparent text-zinc-800 z-40"
       aria-label="Experience chapter"
     >
-      <div className="w-full px-6 md:px-24 max-w-7xl mx-auto relative z-10">
+      <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto relative z-10">
 
         {/* ── Section Header ──────────────────────────────── */}
         <div ref={headRef} className="mb-6 md:mb-8">
@@ -106,7 +106,7 @@ export default function AgenticSection() {
             className="text-zinc-500 text-[11px] uppercase tracking-[0.2em] block mb-2 font-medium"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            Chapter III — Milestones
+            Chapter IV — Milestones
           </span>
           <h2
             className="text-zinc-900 text-3xl md:text-4xl font-normal leading-[1.05]"
@@ -123,14 +123,14 @@ export default function AgenticSection() {
         </div>
 
         {/* ── Timeline ─────────────────────────────────────── */}
-        <div className="grid md:grid-cols-2 gap-4 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
           {milestones.map((m, i) => (
             <div
               key={i}
               ref={(el) => { cardRefs.current[i] = el; }}
             >
               <div
-                className="rounded-2xl p-4 transition-all duration-300"
+                className="rounded-2xl p-4 sm:p-5 transition-all duration-300"
                 style={{
                   background: m.active ? "rgba(0,0,0,0.02)" : "rgba(0,0,0,0.03)",
                   border: m.active
@@ -193,7 +193,7 @@ export default function AgenticSection() {
         </div>
 
         {/* ── Skills grid ───────────────────────────────────── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-12">
           {skills.map((s, i) => (
             <div
               key={i}
@@ -218,7 +218,7 @@ export default function AgenticSection() {
 
       {/* ═══ Certificates & Internships — StickyScrollCards ════ */}
       <div className="w-full">
-        <div className="w-full px-6 md:px-24 max-w-7xl mx-auto mb-4">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto mb-4">
           <div className="flex items-center gap-3">
             <span className="text-zinc-500 text-[11px] uppercase tracking-[0.2em] font-medium" style={{ fontFamily: "var(--font-inter)" }}>
               Certificates & Internships
@@ -226,7 +226,7 @@ export default function AgenticSection() {
             <div className="flex-1 h-px" style={{ background: "rgba(0,0,0,0.06)" }} />
           </div>
           <p className="text-zinc-400 text-[10px] mt-1 italic font-light" style={{ fontFamily: "var(--font-inter)" }}>
-            Replace the src values in AgenticSection.tsx with your actual certificate image paths.
+            Credentials, certificates &amp; internship milestones.
           </p>
         </div>
         <StickyScrollCards
@@ -236,7 +236,7 @@ export default function AgenticSection() {
       </div>
 
       {/* ── Stats strip ────────────────────────────────────── */}
-      <div className="w-full px-6 md:px-24 max-w-7xl mx-auto relative z-10 pt-10">
+      <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto relative z-10 pt-10">
         <div
           ref={statsRef}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t"

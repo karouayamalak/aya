@@ -4,11 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 const chapters = [
   { id: "hero", label: "Intro", num: "I" },
-  { id: "projects", label: "Projects", num: "II" },
-  { id: "experience", label: "Experience", num: "III" },
-  { id: "stack", label: "Tech Stack", num: "IV" },
-  { id: "feedback", label: "Feedback", num: "V" },
-  { id: "contact", label: "Contact", num: "VI" },
+  { id: "services", label: "Services", num: "II" },
+  { id: "projects", label: "Projects", num: "III" },
+  { id: "experience", label: "Experience", num: "IV" },
+  { id: "stack", label: "Tech Stack", num: "V" },
+  { id: "feedback", label: "Feedback", num: "VI" },
+  { id: "contact", label: "Contact", num: "VII" },
 ];
 
 export default function Sidebar() {

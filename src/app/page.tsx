@@ -9,9 +9,9 @@ import Sidebar from "../components/Sidebar";
 import BackgroundController from "../components/BackgroundController";
 import SectionReveal from "../components/SectionReveal";
 import HeroSection from "../components/sections/HeroSection";
+import ServicesSection from "../components/sections/ServicesSection";
 import OnlineSection from "../components/sections/OnlineSection";
 import AgenticSection from "../components/sections/AgenticSection";
-
 import RetailSection from "../components/sections/RetailSection";
 import CheckoutSection from "../components/sections/CheckoutSection";
 import PremiumCTA from "../components/sections/PremiumCTA";
@@ -24,22 +24,28 @@ export default function Home() {
   useEffect(() => {
     if (!loaded) return;
 
-    // ScrollTrigger animation for the green butterfly to fly across the viewport on scroll
+    // ScrollTrigger animation for the butterfly to fly across the viewport on scroll and land directly on the bottom-left flower
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "main",
         start: "top top",
         end: "bottom bottom",
-        scrub: 3.5,
+        scrub: 1.2,
       }
     });
 
-    tl.to("#green-butterfly", { left: "85%", top: "35%", rotation: 40, ease: "power1.inOut" })
-      .to("#green-butterfly", { left: "10%", top: "60%", rotation: -35, ease: "power1.inOut" })
-      .to("#green-butterfly", { left: "90%", top: "25%", rotation: 20, ease: "power1.inOut" })
-      .to("#green-butterfly", { left: "12%", top: "70%", rotation: -45, ease: "power1.inOut" })
-      .to("#green-butterfly", { left: "80%", top: "45%", rotation: 15, ease: "power1.inOut" })
-      .to("#green-butterfly", { left: "15%", top: "80%", rotation: -20, ease: "power1.inOut" });
+    tl.to("#green-butterfly", { left: "82%", top: "25%", rotation: 25, ease: "sine.inOut" })
+      .to("#green-butterfly", { left: "15%", top: "40%", rotation: -25, ease: "sine.inOut" })
+      .to("#green-butterfly", { left: "84%", top: "55%", rotation: 28, ease: "sine.inOut" })
+      .to("#green-butterfly", { left: "18%", top: "68%", rotation: -30, ease: "sine.inOut" })
+      .to("#green-butterfly", { left: "68%", top: "80%", rotation: 20, ease: "sine.inOut" })
+      .to("#green-butterfly", {
+        left: "5%",
+        top: "92%",
+        rotation: -15,
+        scale: 0.85,
+        ease: "power2.out",
+      });
 
   }, [loaded]);
 
@@ -58,7 +64,7 @@ export default function Home() {
          *   WebGL canvas z-0, sections z-10+, Header/Sidebar z-50+
          */}
         <div
-          className="relative min-h-screen text-white font-sans"
+          className="relative min-h-screen text-white font-sans overflow-x-clip"
           style={{ WebkitFontSmoothing: "antialiased" }}
         >
 
@@ -69,18 +75,20 @@ export default function Home() {
           {loaded && (
             <div
               id="green-butterfly"
-              className="fixed pointer-events-none z-[99] w-16 md:w-24 aspect-[0.56] select-none animate-flap transition-opacity duration-300"
+              className="fixed pointer-events-none z-[9999] w-12 sm:w-16 md:w-20 aspect-[0.56] select-none"
               style={{
                 top: "15%",
                 left: "10%",
                 transform: "translate(-50%, -50%)",
               }}
             >
-              <img
-                src="/user_sketch_1.png"
-                alt=""
-                className="w-full h-full object-contain"
-              />
+              <div className="w-full h-full animate-flap">
+                <img
+                  src="/user_sketch_1.png"
+                  alt=""
+                  className="w-full h-full object-contain"
+                />
+              </div>
             </div>
           )}
 
@@ -91,35 +99,38 @@ export default function Home() {
           {/* Scroll story — all sections in document flow */}
           <main className="relative w-full flex flex-col">
 
-            {/* ── Hero (pinned slider) — no reveal wrapper, it's already animated ── */}
+            {/* ── Ch. I   Hero ─────────────────────────────────────────────── */}
             <div className="relative" style={{ zIndex: 10 }}>
               <HeroSection />
             </div>
 
-            {/* ── Ch. II  Projects ──────────────────────────────────────────────── */}
+            {/* ── Ch. II  Services & Freelance ────────────────────────────── */}
             <SectionReveal className="relative" style={{ zIndex: 20 }}>
+              <ServicesSection />
+            </SectionReveal>
+
+            {/* ── Ch. III Projects ─────────────────────────────────────────── */}
+            <SectionReveal className="relative" style={{ zIndex: 30 }}>
               <OnlineSection />
             </SectionReveal>
 
-            {/* ── Ch. III  Experience ───────────────────────────────────────────── */}
-            <div className="relative" style={{ zIndex: 30 }}>
+            {/* ── Ch. IV  Experience & Milestones ─────────────────────────── */}
+            <div className="relative" style={{ zIndex: 40 }}>
               <AgenticSection />
             </div>
 
-
-
-            {/* ── Ch. IV  Tech Stack ────────────────────────────────────────────── */}
-            <div className="relative" style={{ zIndex: 40 }}>
+            {/* ── Ch. V   Tech Stack & Contributions ───────────────────────── */}
+            <div className="relative" style={{ zIndex: 50 }}>
               <RetailSection />
             </div>
 
-            {/* ── Ch. V  Feedback ───────────────────────────────────────────────── */}
-            <SectionReveal className="relative" style={{ zIndex: 50 }}>
+            {/* ── Ch. VI  Feedback & Recommendations ───────────────────────── */}
+            <SectionReveal className="relative" style={{ zIndex: 60 }}>
               <CheckoutSection />
             </SectionReveal>
 
-            {/* ── Ch. VI  Contact + Footer ──────────────────────────────────────── */}
-            <SectionReveal className="relative" style={{ zIndex: 60 }}>
+            {/* ── Ch. VII Contact + Footer ───────────────────────────────── */}
+            <SectionReveal className="relative" style={{ zIndex: 70 }}>
               <PremiumCTA />
             </SectionReveal>
 

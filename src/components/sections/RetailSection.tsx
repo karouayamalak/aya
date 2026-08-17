@@ -19,17 +19,17 @@ const SKILL_CARDS = [
     icon: <ArrowUpRight className="size-6" />,
   },
   {
-    title: "Backend Stack",
+    title: "Backend & MERN",
     description:
-      "Node.js, Express, REST APIs, PostgreSQL, Python, and server-side rendering to power robust application logic.",
+      "Node.js, Express, MongoDB, REST APIs, PostgreSQL, and server-side rendering to power robust application logic.",
     bgColor: "#1a1714",
     textColor: "#ffffff",
     icon: <Layers className="size-6" />,
   },
   {
-    title: "Future Focus",
+    title: "Creative & Future Focus",
     description:
-      "Currently expanding into AI agent automation, workflow automation, and integrating intelligent models into full-stack systems.",
+      "Advanced WebGL shader effects, 3D canvas physics, custom portfolio design systems, and cloud architecture.",
     bgColor: "#f4f1ea",
     textColor: "#1a1714",
     icon: <Pencil className="size-6" />,
@@ -78,11 +78,6 @@ export default function RetailSection() {
       className="relative w-full text-white z-50"
       aria-label="Tech Stack chapter"
     >
-      {/* Subtle radial glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 55% 70% at 50% 30%, rgba(99,102,241,0.04) 0%, transparent 70%)" }}
-      />
 
       {/* Decorative sparkles */}
       <div className="absolute right-[8%] top-[2%] w-24 h-24 md:w-32 md:h-32 pointer-events-none opacity-15 z-0 select-none">
@@ -93,31 +88,31 @@ export default function RetailSection() {
       </div>
 
       {/* Section header */}
-      <div className="w-full px-6 md:px-24 max-w-7xl mx-auto pt-16 md:pt-20 pb-6 relative z-10">
+      <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto pt-16 md:pt-20 pb-6 relative z-10">
         <div ref={headRef}>
           <span
-            className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-1.5"
+            className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-1.5 font-medium"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            Chapter IV — Ecosystem
+            Chapter V — Ecosystem
           </span>
           <h2
             className="text-white text-3xl md:text-4xl font-normal leading-tight"
             style={{ fontFamily: "var(--font-playfair)", fontStyle: "italic" }}
           >
-            Skills I Know
+            Skills &amp; Tech Stack
           </h2>
           <p
-            className="text-white/40 text-sm mt-2 max-w-md font-light"
+            className="text-white/40 text-xs sm:text-sm mt-2 max-w-md font-light"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            Frontend precision meets backend curiosity — scroll down to see cards split and flip.
+            Frontend precision meets robust backend architecture — interactive split cards &amp; activity below.
           </p>
         </div>
       </div>
 
       {/* ── Scroll-Split Card Viewport ───────────────────────── */}
-      <div className="relative z-10 w-full px-4 md:px-12 max-w-6xl mx-auto">
+      <div className="relative z-10 w-full px-2 sm:px-4 md:px-12 max-w-6xl mx-auto">
         <ScrollSplitCard
           imageSrc="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2940&auto=format&fit=crop"
           cards={SKILL_CARDS}
@@ -125,7 +120,7 @@ export default function RetailSection() {
       </div>
 
       {/* ── GitHub Contributions Calendar ───────────────── */}
-      <div ref={calendarRef} className="relative z-10 w-full px-6 md:px-24 max-w-7xl mx-auto py-14 md:py-20">
+      <div ref={calendarRef} className="relative z-10 w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto py-14 md:py-20">
         <div className="mb-6">
           <span
             className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-2"
@@ -142,20 +137,17 @@ export default function RetailSection() {
         </div>
 
         <div
-          className="rounded-2xl p-5 md:p-8 overflow-x-auto"
+          className="rounded-2xl p-5 md:p-6 overflow-x-auto"
           style={{
-            background: "rgba(255,255,255,0.025)",
-            border:     "1px solid rgba(255,255,255,0.07)",
+            background: "#000000",
+            border:     "1px solid rgba(255,255,255,0.08)",
+            boxShadow:  "0 8px 30px rgba(0,0,0,0.6)",
           }}
         >
           <GithubCalendar
             username="karouayamalak"
-            variant="city-lights"
-            shape="rounded"
-            colorSchema="green"
-            glowIntensity={6}
             showTotal={true}
-            className="text-white/70"
+            className="w-full"
           />
         </div>
       </div>

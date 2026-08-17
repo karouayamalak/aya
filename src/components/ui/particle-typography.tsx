@@ -157,15 +157,19 @@ export function CursorDrivenParticleTypography({
 
             ctx.clearRect(0, 0, containerWidth, containerHeight);
 
-            // Draw text to generate pixel map
-            ctx.fillStyle = textColor;
-            // Responsive font size based on container width if text is large
-            const effectiveFontSize = Math.min(fontSize, Math.max(36, containerWidth * 0.16));
-            ctx.font = `bold ${effectiveFontSize}px ${fontFamily}`;
+            // Calculate responsive font size that guarantees text fits container width with margins
+            let targetFontSize = fontSize;
+            const maxAllowedWidth = Math.max(100, containerWidth * 0.88);
+            ctx.font = `bold ${targetFontSize}px ${fontFamily}`;
+            const textMetrics = ctx.measureText(text);
+            if (textMetrics.width > maxAllowedWidth && textMetrics.width > 0) {
+                targetFontSize = Math.floor(targetFontSize * (maxAllowedWidth / textMetrics.width));
+            }
+            ctx.font = `bold ${targetFontSize}px ${fontFamily}`;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
-            // Draw standard text first to measure it
+            // Draw text centered
             ctx.fillText(text, containerWidth / 2, containerHeight / 2);
 
             // Get pixel data

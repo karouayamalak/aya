@@ -25,25 +25,26 @@ export default function Home() {
     if (!loaded) return;
 
     // ScrollTrigger animation for the butterfly to fly across the viewport on scroll and land directly on the bottom-left flower
+    const isMobile = window.innerWidth < 768;
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "main",
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.2,
+        scrub: isMobile ? 1.6 : 1.4,
       }
     });
 
-    tl.to("#green-butterfly", { left: "82%", top: "25%", rotation: 25, ease: "sine.inOut" })
-      .to("#green-butterfly", { left: "15%", top: "40%", rotation: -25, ease: "sine.inOut" })
-      .to("#green-butterfly", { left: "84%", top: "55%", rotation: 28, ease: "sine.inOut" })
-      .to("#green-butterfly", { left: "18%", top: "68%", rotation: -30, ease: "sine.inOut" })
-      .to("#green-butterfly", { left: "68%", top: "80%", rotation: 20, ease: "sine.inOut" })
+    tl.to("#green-butterfly", { left: isMobile ? "80%" : "82%", top: "24%", rotation: 22, ease: "sine.inOut" })
+      .to("#green-butterfly", { left: isMobile ? "14%" : "15%", top: "40%", rotation: -22, ease: "sine.inOut" })
+      .to("#green-butterfly", { left: isMobile ? "82%" : "84%", top: "56%", rotation: 26, ease: "sine.inOut" })
+      .to("#green-butterfly", { left: isMobile ? "16%" : "18%", top: "70%", rotation: -28, ease: "sine.inOut" })
+      .to("#green-butterfly", { left: isMobile ? "70%" : "68%", top: "82%", rotation: 18, ease: "sine.inOut" })
       .to("#green-butterfly", {
-        left: "5%",
-        top: "92%",
-        rotation: -15,
-        scale: 0.85,
+        left: isMobile ? "6.5%" : "5%",
+        top: isMobile ? "91%" : "92%",
+        rotation: -14,
+        scale: isMobile ? 0.75 : 0.85,
         ease: "power2.out",
       });
 

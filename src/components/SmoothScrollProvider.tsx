@@ -29,18 +29,23 @@ export default function SmoothScrollProvider({
     // Connect Lenis to GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    const updateTicker = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
 
+    gsap.ticker.add(updateTicker);
     gsap.ticker.lagSmoothing(500, 33);
 
+    // Initial recalculation of scroll positions
+    const timeoutId = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
     return () => {
+      clearTimeout(timeoutId);
       lenis.destroy();
       (window as any).lenis = null;
-      gsap.ticker.remove((time) => {
-        lenis.raf(time * 1000);
-      });
+      gsap.ticker.remove(updateTicker);
     };
   }, []);
 

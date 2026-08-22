@@ -31,13 +31,28 @@ export default function BackgroundController() {
 
     if (sections.length === 0) return;
 
-    // Set first theme immediately — no load flash
-    const firstChapter = sections[0].dataset.chapter ?? "hero";
-    const firstTheme = SECTION_THEMES[firstChapter] ?? { bg: BLACK, dark: true };
-    document.body.style.backgroundColor = firstTheme.bg;
-    document.body.dataset.theme = firstTheme.dark ? "dark" : "beige";
-    if (webglEl) webglEl.style.opacity = firstTheme.dark ? "1" : "0";
-    currentChapter = firstChapter;
+    // Detect which section is currently at center on mount / load
+    const updateActiveSection = () => {
+      const centerY = window.innerHeight / 2;
+      let activeSec = sections[0];
+
+      for (const sec of sections) {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top <= centerY && rect.bottom >= centerY) {
+          activeSec = sec;
+          break;
+        }
+      }
+
+      const chapter = activeSec.dataset.chapter ?? "hero";
+      const theme = SECTION_THEMES[chapter] ?? { bg: BLACK, dark: true };
+      if (chapter !== currentChapter) {
+        currentChapter = chapter;
+        applyTheme(theme, webglEl);
+      }
+    };
+
+    updateActiveSection();
 
     const triggers: ScrollTrigger[] = [];
 
@@ -47,8 +62,8 @@ export default function BackgroundController() {
 
       const st = ScrollTrigger.create({
         trigger: section,
-        start: "top 50%",
-        end:   "bottom 50%",
+        start: "top 55%",
+        end:   "bottom 45%",
         onEnter: () => {
           if (chapter === currentChapter) return;
           currentChapter = chapter;
@@ -64,7 +79,19 @@ export default function BackgroundController() {
       triggers.push(st);
     });
 
-    return () => triggers.forEach((t) => t.kill());
+    const onScroll = () => {
+      // Safety fallback during rapid scrolling or anchor navigation
+      updateActiveSection();
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateActiveSection);
+      triggers.forEach((t) => t.kill());
+    };
   }, []);
 
   return null;
@@ -78,7 +105,7 @@ function applyTheme(
 
   gsap.to(document.body, {
     backgroundColor: theme.bg,
-    duration: 0.8,
+    duration: 0.6,
     ease: "power1.inOut",
     overwrite: "auto",
   });
@@ -92,3 +119,4 @@ function applyTheme(
     });
   }
 }
+

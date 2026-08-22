@@ -35,7 +35,6 @@ const skills = [
   { title: "Clean Architecture", body: "Component-driven design, reusable patterns, and maintainable code at scale." },
 ];
 
-/* ── Combined Certificates and Internships ─────────────── */
 const combinedCards: StickyScrollCardItem[] = [
   {
     title: "",
@@ -76,7 +75,7 @@ export default function AgenticSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 75%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
       });
 

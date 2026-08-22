@@ -55,7 +55,7 @@ export default function ServicesSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 75%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
       });
 
@@ -153,11 +153,8 @@ export default function ServicesSection() {
               {/* Top Row */}
               <div className="flex items-start justify-between gap-3">
                 <span
-                  className="text-[8px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                  className="text-[8px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full text-white border border-white/20 bg-white/10"
                   style={{
-                    background: "rgba(255, 255, 255, 0.06)",
-                    color: "#ffffff",
-                    border: "1px solid rgba(255, 255, 255, 0.12)",
                     fontFamily: "var(--font-inter)",
                   }}
                 >
@@ -186,16 +183,13 @@ export default function ServicesSection() {
               </div>
 
               {/* Stack / Action footer */}
-              <div className="flex items-center justify-between gap-3 mt-auto pt-2.5" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+              <div className="flex items-center justify-between gap-3 mt-auto pt-2.5 border-t border-white/10">
                 <div className="flex flex-wrap gap-1.5">
                   {item.stack.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[9px] font-medium px-2 py-0.5 rounded-md"
+                      className="text-[9px] font-medium px-2 py-0.5 rounded-md text-white/70 bg-white/5 border border-white/10"
                       style={{
-                        background: "rgba(255,255,255,0.05)",
-                        color: "rgba(255,255,255,0.55)",
-                        border: "1px solid rgba(255,255,255,0.08)",
                         fontFamily: "var(--font-inter)",
                       }}
                     >

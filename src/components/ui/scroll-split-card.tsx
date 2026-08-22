@@ -66,7 +66,7 @@ export function ScrollSplitCard({
   return (
     <div
       ref={containerRef}
-      className={cn("relative h-[320vh] md:h-[400vh] w-full", className)}
+      className={cn("relative h-[160vh] md:h-[200vh] w-full", className)}
     >
       <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden [perspective:1200px]">
         {/* Starting Text indicator */}

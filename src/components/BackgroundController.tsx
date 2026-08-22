@@ -47,8 +47,8 @@ export default function BackgroundController() {
 
       const st = ScrollTrigger.create({
         trigger: section,
-        start: "top 55%",
-        end:   "bottom 45%",
+        start: "top 50%",
+        end:   "bottom 50%",
         onEnter: () => {
           if (chapter === currentChapter) return;
           currentChapter = chapter;
@@ -78,16 +78,16 @@ function applyTheme(
 
   gsap.to(document.body, {
     backgroundColor: theme.bg,
-    duration: 1.0,
-    ease: "power2.inOut",
+    duration: 0.8,
+    ease: "power1.inOut",
     overwrite: "auto",
   });
 
   if (webglEl) {
     gsap.to(webglEl, {
       opacity: theme.dark ? 1 : 0,
-      duration: 0.6,
-      ease: "power2.inOut",
+      duration: 0.5,
+      ease: "power1.inOut",
       overwrite: "auto",
     });
   }

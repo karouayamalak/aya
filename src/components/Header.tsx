@@ -65,7 +65,7 @@ export default function Header() {
           <div className="relative w-[20px] h-[20px] flex items-center justify-center">
             <svg
               className="w-[18px] h-[18px] flex-shrink-0 transition-colors duration-500"
-              style={{ color: "#ffffff" }}
+              style={{ color: isLight ? "#000000" : "#ffffff" }}
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -139,13 +139,13 @@ export default function Header() {
           </a>
           <button
             onClick={() => scrollToSection("contact")}
-            className="text-[12px] font-semibold px-4 py-1.5 rounded-full bg-white text-black border border-black/10 hover:bg-zinc-100 transition-all duration-300 cursor-pointer"
+            className="header-hire-btn text-[12px] font-semibold px-4 py-1.5 rounded-full border transition-all duration-300 cursor-pointer shadow-sm"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Hire me
           </button>
           <button
-            className={`md:hidden p-1 transition-colors duration-300 ${logoColor}`}
+            className={`md:hidden flex items-center justify-center w-11 h-11 -mr-2 transition-colors duration-300 ${logoColor}`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
@@ -162,40 +162,42 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — grid-rows for GPU-composited smooth open/close */}
       <div
-        className={`md:hidden backdrop-blur-md border-t transition-all duration-300 overflow-hidden ${
+        className={`md:hidden backdrop-blur-md border-t transition-[grid-template-rows] duration-300 overflow-hidden grid ${
           isLight
             ? "bg-white/95 border-black/10"
             : "bg-black/95 border-white/10"
-        } ${mobileOpen ? "max-h-[500px] py-4" : "max-h-0 py-0"}`}
+        } ${mobileOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
-        <div className="px-6 flex flex-col gap-3">
-          {[
-            { id: "services",   label: "Services" },
-            { id: "projects",   label: "Projects" },
-            { id: "experience", label: "Experience" },
-            { id: "stack",      label: "Tech Stack" },
-            { id: "feedback",   label: "Feedback" },
-            { id: "contact",    label: "Contact" },
-          ].map(({ id, label }) => (
-            <button
-              key={id}
-              className={`text-base font-semibold text-left border-b pb-2 cursor-pointer transition-colors ${
-                isLight
-                  ? "text-black border-black/10 hover:text-black/60"
-                  : "text-white border-white/10 hover:text-white/70"
-              }`}
-              style={{ fontFamily: "var(--font-inter)" }}
-              onClick={() => { setMobileOpen(false); scrollToSection(id); }}
-            >
-              {label}
-            </button>
-          ))}
-          {/* Social links in mobile menu */}
-          <div className="flex items-center gap-4 pt-1">
-            <a href="https://github.com/karouayamalak" target="_blank" rel="noopener noreferrer" className={`text-xs font-medium no-underline transition-colors ${isLight ? "text-black/60" : "text-white/60"}`} style={{ fontFamily: "var(--font-inter)" }}>GitHub</a>
-            <a href="https://www.linkedin.com/in/aya-malak-karou-15a527398" target="_blank" rel="noopener noreferrer" className={`text-xs font-medium no-underline transition-colors ${isLight ? "text-black/60" : "text-white/60"}`} style={{ fontFamily: "var(--font-inter)" }}>LinkedIn</a>
+        <div className="overflow-hidden">
+          <div className="px-6 py-4 flex flex-col gap-1">
+            {[
+              { id: "services",   label: "Services" },
+              { id: "projects",   label: "Projects" },
+              { id: "experience", label: "Experience" },
+              { id: "stack",      label: "Tech Stack" },
+              { id: "feedback",   label: "Feedback" },
+              { id: "contact",    label: "Contact" },
+            ].map(({ id, label }) => (
+              <button
+                key={id}
+                className={`text-base font-semibold text-left border-b py-3 cursor-pointer transition-colors min-h-[44px] ${
+                  isLight
+                    ? "text-black border-black/10 hover:text-black/60"
+                    : "text-white border-white/10 hover:text-white/70"
+                }`}
+                style={{ fontFamily: "var(--font-inter)" }}
+                onClick={() => { setMobileOpen(false); scrollToSection(id); }}
+              >
+                {label}
+              </button>
+            ))}
+            {/* Social links in mobile menu */}
+            <div className="flex items-center gap-4 pt-3 pb-1">
+              <a href="https://github.com/karouayamalak" target="_blank" rel="noopener noreferrer" className={`text-sm font-medium no-underline transition-colors min-h-[44px] flex items-center ${isLight ? "text-black/60" : "text-white/60"}`} style={{ fontFamily: "var(--font-inter)" }}>GitHub</a>
+              <a href="https://www.linkedin.com/in/aya-malak-karou-15a527398" target="_blank" rel="noopener noreferrer" className={`text-sm font-medium no-underline transition-colors min-h-[44px] flex items-center ${isLight ? "text-black/60" : "text-white/60"}`} style={{ fontFamily: "var(--font-inter)" }}>LinkedIn</a>
+            </div>
           </div>
         </div>
       </div>

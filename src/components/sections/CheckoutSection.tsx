@@ -108,7 +108,7 @@ export default function CheckoutSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
       })
         .to(formRef.current, { autoAlpha: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0)
@@ -237,7 +237,7 @@ export default function CheckoutSection() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-dashed border-white/20 hover:border-white/45 text-white/50 hover:text-white transition-all cursor-pointer text-xs font-medium"
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-lg border border-dashed border-white/20 hover:border-white/45 text-white/50 hover:text-white transition-all cursor-pointer text-xs font-medium min-h-[44px]"
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
                     <span className="text-base leading-none">↑</span>
@@ -276,7 +276,7 @@ export default function CheckoutSection() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full bg-white hover:bg-zinc-100 text-zinc-950 text-[11px] font-semibold py-2.5 rounded-lg transition-all cursor-pointer disabled:opacity-50"
+                className="w-full bg-white hover:bg-zinc-100 text-zinc-950 text-[11px] font-semibold py-3 rounded-lg transition-all cursor-pointer disabled:opacity-50 min-h-[44px]"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 {submitting ? "Publishing…" : "Publish Recommendation"}
@@ -296,7 +296,7 @@ export default function CheckoutSection() {
           </div>
 
           {/* ── Right: Scrollable feed ───────────────────────────────────────── */}
-          <div ref={feedRef} className="lg:col-span-3 flex flex-col gap-4 max-h-[560px] overflow-y-auto pr-1" data-lenis-prevent>
+          <div ref={feedRef} className="lg:col-span-3 flex flex-col gap-4 max-h-[400px] sm:max-h-[480px] lg:max-h-[560px] overflow-y-auto pr-1" data-lenis-prevent>
             <div className="flex items-center justify-between mb-1">
               <h3 className="text-white text-sm font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
                 Recommendations

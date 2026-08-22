@@ -38,7 +38,7 @@ export default function PremiumCTA() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 80%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
       });
 
@@ -205,7 +205,7 @@ export default function PremiumCTA() {
         >
           <a
             href="mailto:a_karou@estin.dz"
-            className="magnetic-btn inline-flex items-center gap-2 bg-white hover:bg-white/90 text-black font-semibold text-xs px-6 py-2.5 rounded-full transition-colors duration-200 no-underline shadow-[0_10px_20px_rgba(255,255,255,0.1)]"
+            className="magnetic-btn inline-flex items-center gap-2 bg-white hover:bg-white/90 text-black font-semibold text-xs px-6 py-3 rounded-full transition-colors duration-200 no-underline shadow-[0_10px_20px_rgba(255,255,255,0.1)] min-h-[44px]"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Email Me
@@ -215,7 +215,7 @@ export default function PremiumCTA() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="magnetic-btn inline-flex items-center gap-2 bg-transparent hover:bg-white/5 text-white border border-white/20 font-semibold text-xs px-6 py-2.5 rounded-full transition-colors duration-200 no-underline"
+            className="magnetic-btn inline-flex items-center gap-2 bg-transparent hover:bg-white/5 text-white border border-white/20 font-semibold text-xs px-6 py-3 rounded-full transition-colors duration-200 no-underline min-h-[44px]"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             View Resume
@@ -234,7 +234,7 @@ export default function PremiumCTA() {
               placeholder="e.g. Alex"
               value={contactName}
               onChange={(e) => setContactName(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors disabled:opacity-50"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors disabled:opacity-50 min-h-[44px]"
             />
           </div>
           <div>
@@ -246,7 +246,7 @@ export default function PremiumCTA() {
               placeholder="e.g. alex@domain.com"
               value={contactEmail}
               onChange={(e) => setContactEmail(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors disabled:opacity-50"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-white transition-colors disabled:opacity-50 min-h-[44px]"
             />
           </div>
           <div>
@@ -264,7 +264,7 @@ export default function PremiumCTA() {
           <button
             type="submit"
             disabled={contactSubmitting}
-            className="w-full bg-white hover:bg-white/90 disabled:bg-white/50 text-black font-semibold text-xs py-2 rounded-lg transition-colors cursor-pointer text-center flex items-center justify-center gap-2"
+            className="w-full bg-white hover:bg-white/90 disabled:bg-white/50 text-black font-semibold text-xs py-3 rounded-lg transition-colors cursor-pointer text-center flex items-center justify-center gap-2 min-h-[44px]"
           >
             {contactSubmitting ? (
               <>

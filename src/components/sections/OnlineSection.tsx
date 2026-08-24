@@ -10,6 +10,16 @@ gsap.registerPlugin(ScrollTrigger);
 const PROJECTS = [
   {
     date: "2026",
+    title: "Coffee Boost",
+    desc: "A modern artisanal coffee roastery & cafe platform featuring interactive specialty brew menus, savory breakfast treats, and seamless online ordering.",
+    category: "Coffee Roastery & Cafe",
+    stack: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
+    type: "fullstack",
+    accent: "#ffffff",
+    url: "https://coffee-boost.vercel.app",
+  },
+  {
+    date: "2026",
     title: "Unicare Clinic",
     desc: "A comprehensive healthcare portal facilitating clinic workflow, doctor searches, appointment booking, and patient records.",
     category: "Healthcare Portal",
@@ -76,7 +86,7 @@ const PROJECTS = [
     stack: ["React", "Node.js", "GSAP", "Tailwind CSS"],
     type: "freelance",
     accent: "#ffffff",
-    url: "https://bylka-bio.onrender.com",
+    url: "https://bylka-bio-dz.vercel.app",
   },
 ];
 

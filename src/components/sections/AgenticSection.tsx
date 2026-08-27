@@ -94,7 +94,7 @@ export default function AgenticSection() {
       ref={sectionRef}
       id="experience"
       data-chapter="experience"
-      className="relative w-full py-14 md:py-18 flex flex-col justify-center bg-transparent text-zinc-800 z-40"
+      className="relative w-full py-14 md:py-18 flex flex-col justify-center bg-transparent text-white z-40"
       aria-label="Experience chapter"
     >
       <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto relative z-10">
@@ -102,19 +102,19 @@ export default function AgenticSection() {
         {/* ── Section Header ──────────────────────────────── */}
         <div ref={headRef} className="mb-6 md:mb-8">
           <span
-            className="text-zinc-500 text-[11px] uppercase tracking-[0.2em] block mb-2 font-medium"
+            className="text-white/35 text-[11px] uppercase tracking-[0.2em] block mb-2 font-medium"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Chapter IV — Milestones
           </span>
           <h2
-            className="text-zinc-900 text-3xl md:text-4xl font-normal leading-[1.05]"
+            className="text-white text-3xl md:text-4xl font-normal leading-[1.05]"
             style={{ fontFamily: "var(--font-playfair)", fontStyle: "italic" }}
           >
             Experience
           </h2>
           <p
-            className="text-zinc-650 text-xs md:text-sm max-w-lg mt-2 leading-relaxed"
+            className="text-white/50 text-xs md:text-sm max-w-lg mt-2 leading-relaxed"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
           >
             My learning path — from crafting frontends to shipping full-stack products.
@@ -129,44 +129,41 @@ export default function AgenticSection() {
               ref={(el) => { cardRefs.current[i] = el; }}
             >
               <div
-                className="rounded-2xl p-4 sm:p-5 transition-all duration-300"
+                className="rounded-2xl p-4 sm:p-5 transition-all duration-300 glass-panel hover-shine-wrapper group"
                 style={{
-                  background: m.active ? "rgba(0,0,0,0.02)" : "rgba(0,0,0,0.03)",
+                  background: m.active ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.03)",
                   border: m.active
-                    ? "1px solid rgba(0,0,0,0.12)"
-                    : "1px solid rgba(0,0,0,0.06)",
+                    ? "1px solid rgba(255,255,255,0.2)"
+                    : "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 {m.active && (
                   <div className="flex items-center gap-2 mb-3">
                     <span
-                      className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                      className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
                       style={{
-                        background: "rgba(0,0,0,0.05)",
-                        color: "#18181b",
-                        border: "1px solid rgba(0,0,0,0.1)",
                         fontFamily: "var(--font-inter)",
                       }}
                     >
-                      <span className="live-dot w-1.5 h-1.5 rounded-full inline-block bg-zinc-800" />
+                      <span className="live-dot w-1.5 h-1.5 rounded-full inline-block bg-emerald-400 animate-pulse" />
                       Now Learning
                     </span>
                   </div>
                 )}
                 <span
-                  className="text-zinc-400 text-[10px] uppercase tracking-widest block mb-2 font-medium"
+                  className="text-white/40 text-[10px] uppercase tracking-widest block mb-2 font-medium"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
                   {m.period}
                 </span>
                 <h3
-                  className="text-zinc-900 text-base md:text-lg font-semibold mb-2 leading-tight"
+                  className="text-white text-base md:text-lg font-semibold mb-2 leading-tight"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
                   {m.title}
                 </h3>
                 <p
-                  className="text-zinc-650 text-xs leading-relaxed mb-3 font-light"
+                  className="text-white/60 text-xs leading-relaxed mb-3 font-light"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
                   {m.body}
@@ -175,10 +172,8 @@ export default function AgenticSection() {
                   {m.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                      className="text-[10px] font-medium px-2 py-0.5 rounded-md text-white/80 bg-white/5 border border-white/10"
                       style={{
-                        background: "#18181b",
-                        color: "#ffffff",
                         fontFamily: "var(--font-inter)",
                       }}
                     >
@@ -197,16 +192,16 @@ export default function AgenticSection() {
             <div
               key={i}
               ref={(el) => { skillRefs.current[i] = el; }}
-              className="rounded-xl p-4 transition-all duration-300"
+              className="rounded-xl p-4 transition-all duration-300 glass-panel hover:border-white/20"
               style={{
-                background: "rgba(0,0,0,0.015)",
-                border: "1px solid rgba(0,0,0,0.05)",
+                background: "rgba(255,255,255,0.025)",
+                border: "1px solid rgba(255,255,255,0.07)",
               }}
             >
-              <h4 className="text-zinc-900 text-[12px] font-semibold mb-1.5" style={{ fontFamily: "var(--font-inter)" }}>
+              <h4 className="text-white text-[12px] font-semibold mb-1.5" style={{ fontFamily: "var(--font-inter)" }}>
                 {s.title}
               </h4>
-              <p className="text-zinc-550 text-[10px] leading-relaxed font-light" style={{ fontFamily: "var(--font-inter)" }}>
+              <p className="text-white/50 text-[10px] leading-relaxed font-light" style={{ fontFamily: "var(--font-inter)" }}>
                 {s.body}
               </p>
             </div>
@@ -219,12 +214,12 @@ export default function AgenticSection() {
       <div className="w-full">
         <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto mb-4">
           <div className="flex items-center gap-3">
-            <span className="text-zinc-500 text-[11px] uppercase tracking-[0.2em] font-medium" style={{ fontFamily: "var(--font-inter)" }}>
-              Certificates & Internships
+            <span className="text-white/40 text-[11px] uppercase tracking-[0.2em] font-medium" style={{ fontFamily: "var(--font-inter)" }}>
+              Certificates &amp; Internships
             </span>
-            <div className="flex-1 h-px" style={{ background: "rgba(0,0,0,0.06)" }} />
+            <div className="flex-1 h-px bg-white/10" />
           </div>
-          <p className="text-zinc-400 text-[10px] mt-1 italic font-light" style={{ fontFamily: "var(--font-inter)" }}>
+          <p className="text-white/40 text-[10px] mt-1 italic font-light" style={{ fontFamily: "var(--font-inter)" }}>
             Credentials, certificates &amp; internship milestones.
           </p>
         </div>
@@ -238,8 +233,7 @@ export default function AgenticSection() {
       <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto relative z-10 pt-10">
         <div
           ref={statsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t"
-          style={{ borderColor: "rgba(0,0,0,0.08)" }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-white/10"
         >
           {[
             { val: "1yr+", label: "Coding Experience" },
@@ -249,13 +243,13 @@ export default function AgenticSection() {
           ].map((stat, i) => (
             <div key={i} className="flex flex-col gap-1">
               <span
-                className="text-zinc-900 text-3xl md:text-4xl font-bold leading-none"
+                className="text-white text-3xl md:text-4xl font-bold leading-none"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 {stat.val}
               </span>
               <span
-                className="text-zinc-400 text-[11px] uppercase tracking-wider font-medium"
+                className="text-white/40 text-[11px] uppercase tracking-wider font-medium"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 {stat.label}

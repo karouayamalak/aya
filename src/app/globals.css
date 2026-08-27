@@ -301,206 +301,36 @@ canvas {
   pointer-events: none;
 }
 
-/* ─── Global Theme Adaptation ─────────────────────────────── */
-/* ─── Global Theme Adaptation ─────────────────────────────── */
-[data-theme="beige"] {
-  --text-primary: #121212;
-  --text-secondary: rgba(18, 18, 18, 0.55);
-}
-
-[data-theme="dark"] {
+/* ─── Global Theme ─────────────────────────────────────────── */
+:root {
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.55);
 }
 
-/* Smooth text & border color transitions when theme switches (dark ↔ beige).
-   background-color is intentionally animated exclusively by GSAP. */
-.text-white,
-[class*="text-white"],
-.border-white,
-[class*="border-white"],
-.glass-panel,
+[data-theme="dark"],
+[data-theme="beige"],
+body {
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.55);
+}
+
+/* Sketches display cleanly in inverted crisp white on pure black */
 .theme-sketch {
-  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: invert(1) brightness(2);
+  transition: opacity 0.3s ease;
 }
 
-/* Automatically invert colors on beige backgrounds */
-[data-theme="beige"] .text-white {
-  color: #121212 !important;
-}
-
-[data-theme="beige"] .text-white\/10 {
-  color: rgba(18, 18, 18, 0.1) !important;
-}
-
-[data-theme="beige"] .text-white\/20 {
-  color: rgba(18, 18, 18, 0.2) !important;
-}
-
-[data-theme="beige"] .text-white\/25 {
-  color: rgba(18, 18, 18, 0.25) !important;
-}
-
-[data-theme="beige"] .text-white\/30 {
-  color: rgba(18, 18, 18, 0.3) !important;
-}
-
-[data-theme="beige"] .text-white\/35 {
-  color: rgba(18, 18, 18, 0.45) !important;
-}
-
-[data-theme="beige"] .text-white\/40 {
-  color: rgba(18, 18, 18, 0.5) !important;
-}
-
-[data-theme="beige"] .text-white\/45 {
-  color: rgba(18, 18, 18, 0.55) !important;
-}
-
-[data-theme="beige"] .text-white\/50 {
-  color: rgba(18, 18, 18, 0.6) !important;
-}
-
-[data-theme="beige"] .text-white\/55 {
-  color: rgba(18, 18, 18, 0.65) !important;
-}
-
-[data-theme="beige"] .text-white\/60 {
-  color: rgba(18, 18, 18, 0.7) !important;
-}
-
-[data-theme="beige"] .text-white\/70 {
-  color: rgba(18, 18, 18, 0.8) !important;
-}
-
-[data-theme="beige"] .text-white\/80 {
-  color: rgba(18, 18, 18, 0.9) !important;
-}
-
-[data-theme="beige"] .bg-white {
-  background-color: #121212 !important;
-}
-
-[data-theme="beige"] .bg-white\/5,
-[data-theme="beige"] .bg-white\/\[0\.04\] {
-  background-color: rgba(18, 18, 18, 0.05) !important;
-}
-
-[data-theme="beige"] .bg-white\/10 {
-  background-color: rgba(18, 18, 18, 0.08) !important;
-}
-
-[data-theme="beige"] .border-white {
-  border-color: #121212 !important;
-}
-
-[data-theme="beige"] .border-white\/10 {
-  border-color: rgba(18, 18, 18, 0.1) !important;
-}
-
-[data-theme="beige"] .border-white\/20 {
-  border-color: rgba(18, 18, 18, 0.18) !important;
-}
-
-[data-theme="beige"] .glass-panel {
-  background: rgba(0, 0, 0, 0.03) !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
-}
-
-[data-theme="beige"] .glass-panel:hover {
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08) !important;
-}
-
-/* Sketches turn dark on beige background */
-.theme-sketch {
-  filter: brightness(1);
-}
-
-[data-theme="beige"] .theme-sketch {
-  filter: brightness(0) !important;
-  opacity: 0.55 !important;
-}
-
-/* Ensure Recommendation Section (#feedback) card is ALWAYS dark with crisp white text */
-#feedback .text-white,
-[data-theme="beige"] #feedback .text-white {
-  color: #ffffff !important;
-}
-
-#feedback .text-white\/30,
-[data-theme="beige"] #feedback .text-white\/30 {
-  color: rgba(255, 255, 255, 0.3) !important;
-}
-
-#feedback .text-white\/40,
-[data-theme="beige"] #feedback .text-white\/40 {
-  color: rgba(255, 255, 255, 0.4) !important;
-}
-
-#feedback .text-white\/50,
-[data-theme="beige"] #feedback .text-white\/50 {
-  color: rgba(255, 255, 255, 0.5) !important;
-}
-
-#feedback .text-white\/60,
-[data-theme="beige"] #feedback .text-white\/60 {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
-#feedback .text-white\/70,
-[data-theme="beige"] #feedback .text-white\/70 {
-  color: rgba(255, 255, 255, 0.7) !important;
-}
-
-#feedback .text-white\/80,
-[data-theme="beige"] #feedback .text-white\/80 {
-  color: rgba(255, 255, 255, 0.8) !important;
-}
-
-#feedback .border-white\/10,
-[data-theme="beige"] #feedback .border-white\/10 {
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-#feedback .border-white\/20,
-[data-theme="beige"] #feedback .border-white\/20 {
-  border-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-#feedback .bg-white,
-[data-theme="beige"] #feedback .bg-white {
-  background-color: #ffffff !important;
-  color: #09090b !important;
-}
-
-/* ─── Header Hire Me Button Dynamic Adaptation ────────────────────────── */
+/* ─── Header Hire Me Button ─────────────────────────────────────────── */
 .header-hire-btn {
   background-color: #ffffff !important;
   color: #000000 !important;
-  border-color: rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
   transition: all 0.3s ease !important;
 }
 
 .header-hire-btn:hover {
-  background-color: #f4f4f5 !important;
+  background-color: #e4e4e7 !important;
   color: #000000 !important;
-}
-
-[data-theme="beige"] .header-hire-btn {
-  background-color: #121212 !important;
-  color: #ffffff !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-[data-theme="beige"] .header-hire-btn:hover {
-  background-color: #27272a !important;
-  color: #ffffff !important;
 }
 
 /* ─── Pulse animation for live indicators ────────────────────────────── */
@@ -862,17 +692,8 @@ canvas {
 
 /* Dynamic Sketch Theme Coloring */
 .theme-sketch {
-  transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-[data-theme="dark"] .theme-sketch {
   filter: invert(1) brightness(2);
-  /* Smooth white inversion */
-}
-
-[data-theme="beige"] .theme-sketch {
-  filter: invert(0);
-  /* Normal black */
+  transition: opacity 0.3s ease;
 }
 
 /* Butterfly wing flap animation */

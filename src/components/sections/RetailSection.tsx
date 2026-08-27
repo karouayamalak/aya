@@ -14,7 +14,7 @@ const SKILL_CARDS = [
     title: "Frontend Stack",
     description:
       "HTML5, CSS3, JavaScript, TypeScript, Tailwind CSS, React, Next.js, GSAP, and Framer Motion for pixel-perfect user experiences.",
-    bgColor: "#7a5c3e",
+    bgColor: "#1c1712",
     textColor: "#ffffff",
     icon: <ArrowUpRight className="size-6" />,
   },
@@ -22,7 +22,7 @@ const SKILL_CARDS = [
     title: "Backend & MERN",
     description:
       "Node.js, Express, MongoDB, REST APIs, PostgreSQL, and server-side rendering to power robust application logic.",
-    bgColor: "#1a1714",
+    bgColor: "#12161f",
     textColor: "#ffffff",
     icon: <Layers className="size-6" />,
   },
@@ -30,8 +30,8 @@ const SKILL_CARDS = [
     title: "Creative & Future Focus",
     description:
       "Advanced WebGL shader effects, 3D canvas physics, custom portfolio design systems, and cloud architecture.",
-    bgColor: "#f4f1ea",
-    textColor: "#1a1714",
+    bgColor: "#16131f",
+    textColor: "#ffffff",
     icon: <Pencil className="size-6" />,
   },
 ];

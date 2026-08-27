@@ -29,7 +29,7 @@ function Stars({ rating, interactive = false, onChange }: { rating: number; inte
           type="button"
           disabled={!interactive}
           onClick={() => onChange?.(n)}
-          className={`text-sm transition-colors ${interactive ? "cursor-pointer hover:scale-110" : "cursor-default"} ${n <= rating ? "text-amber-400" : "text-black/15"}`}
+          className={`text-sm transition-colors ${interactive ? "cursor-pointer hover:scale-110" : "cursor-default"} ${n <= rating ? "text-amber-400" : "text-white/20"}`}
           style={{ fontFamily: "var(--font-inter)" }}
         >
           ★

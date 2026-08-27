@@ -7,17 +7,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const BLACK = "#000000";
-const BEIGE = "#f4f1ea";
 
-// Alternates: black → beige → black → beige …
+// Uniform pure black background across all chapters
 const SECTION_THEMES: Record<string, { bg: string; dark: boolean }> = {
-  hero:       { bg: BLACK, dark: true  },
-  services:   { bg: BEIGE, dark: false },
-  projects:   { bg: BLACK, dark: true  },
-  experience: { bg: BEIGE, dark: false },
-  stack:      { bg: BLACK, dark: true  },
-  feedback:   { bg: BLACK, dark: true  },
-  contact:    { bg: BLACK, dark: true  },
+  hero:       { bg: BLACK, dark: true },
+  services:   { bg: BLACK, dark: true },
+  projects:   { bg: BLACK, dark: true },
+  experience: { bg: BLACK, dark: true },
+  stack:      { bg: BLACK, dark: true },
+  feedback:   { bg: BLACK, dark: true },
+  contact:    { bg: BLACK, dark: true },
 };
 
 let currentChapter = "";

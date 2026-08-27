@@ -42,15 +42,15 @@ function StickyScrollCard({
           scale,
           rotate: rotation,
           top: `calc(-4vh + ${i * 16 + 70}px)`,
-          borderRadius: 8,
+          borderRadius: 12,
           boxShadow:
-            "0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.07), 0 12px 32px rgba(0,0,0,0.10), 0 24px 56px rgba(0,0,0,0.08)",
+            "0 10px 40px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.1) inset",
         }}
-        className="relative -top-1/4 origin-top overflow-hidden bg-white max-w-[460px] w-[88vw] border border-black/5"
+        className="relative -top-1/4 origin-top overflow-hidden bg-zinc-900/95 max-w-[460px] w-[88vw] border border-white/15 backdrop-blur-md"
       >
         {/* 10px border on three sides */}
         <div className="p-2 sm:p-[10px] pb-0">
-          <div className="w-full overflow-hidden rounded-sm">
+          <div className="w-full overflow-hidden rounded-lg">
             {src && src.trim() !== "" ? (
               <img
                 src={src}
@@ -59,16 +59,16 @@ function StickyScrollCard({
                 draggable={false}
               />
             ) : (
-              <div className="h-[190px] sm:h-[240px] md:h-[290px] w-full bg-zinc-950 flex flex-col items-center justify-center border border-white/5 rounded-sm relative overflow-hidden">
+              <div className="h-[190px] sm:h-[240px] md:h-[290px] w-full bg-zinc-950 flex flex-col items-center justify-center border border-white/10 rounded-lg relative overflow-hidden">
                 <div 
-                  className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                  className="absolute inset-0 opacity-[0.05] pointer-events-none"
                   style={{
                     backgroundImage: `radial-gradient(#ffffff 1px, transparent 1px)`,
                     backgroundSize: '16px 16px'
                   }}
                 />
-                <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-mono relative z-10">
-                  Placeholder Certificate
+                <p className="text-[10px] text-white/50 uppercase tracking-widest font-mono relative z-10">
+                  Certificate
                 </p>
               </div>
             )}
@@ -78,7 +78,7 @@ function StickyScrollCard({
         {/* Caption strip */}
         {title && title.trim() !== "" && (
           <div className="flex h-[38px] sm:h-[44px] items-center justify-center px-3 sm:px-4">
-            <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-zinc-900 dark:text-zinc-100">
+            <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-white">
               {title}
             </p>
           </div>
@@ -93,15 +93,15 @@ function MobileCard({ title, src, i }: { title: string; src: string; i: number }
   return (
     <div className="flex-shrink-0 w-[80vw] max-w-[320px] snap-center">
       <div
-        className="overflow-hidden bg-white border border-black/5"
+        className="overflow-hidden bg-zinc-900/95 border border-white/15 backdrop-blur-md"
         style={{
-          borderRadius: 8,
-          boxShadow: "0 4px 20px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06)",
+          borderRadius: 12,
+          boxShadow: "0 10px 30px rgba(0,0,0,0.6)",
           rotate: `${CARD_ROTATIONS[i % CARD_ROTATIONS.length]}deg`,
         }}
       >
         <div className="p-[8px] pb-0">
-          <div className="w-full overflow-hidden rounded-sm">
+          <div className="w-full overflow-hidden rounded-lg">
             {src && src.trim() !== "" ? (
               <img
                 src={src}
@@ -110,16 +110,16 @@ function MobileCard({ title, src, i }: { title: string; src: string; i: number }
                 draggable={false}
               />
             ) : (
-              <div className="h-[180px] w-full bg-zinc-950 flex flex-col items-center justify-center border border-white/5 rounded-sm relative overflow-hidden">
+              <div className="h-[180px] w-full bg-zinc-950 flex flex-col items-center justify-center border border-white/10 rounded-lg relative overflow-hidden">
                 <div
-                  className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                  className="absolute inset-0 opacity-[0.05] pointer-events-none"
                   style={{
                     backgroundImage: `radial-gradient(#ffffff 1px, transparent 1px)`,
                     backgroundSize: "16px 16px",
                   }}
                 />
-                <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-mono relative z-10">
-                  Placeholder
+                <p className="text-[10px] text-white/50 uppercase tracking-widest font-mono relative z-10">
+                  Certificate
                 </p>
               </div>
             )}
@@ -127,7 +127,7 @@ function MobileCard({ title, src, i }: { title: string; src: string; i: number }
         </div>
         {title && title.trim() !== "" && (
           <div className="flex h-[38px] items-center justify-center px-3">
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-900">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white">
               {title}
             </p>
           </div>

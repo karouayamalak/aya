@@ -49,6 +49,12 @@ export default function RootLayout({
     <html
       lang="en"
     >
+      <head>
+        {/* Preload above-the-fold hero images so they appear immediately */}
+        <link rel="preload" as="image" href="/hero_flower_luminous.png" />
+        <link rel="preload" as="image" href="/hero_butterfly_wing.png" />
+        <link rel="preload" as="image" href="/profile.jpg" />
+      </head>
       <body className="bg-black text-white overflow-x-hidden" data-theme="dark">
         {/* Global SVG Filters — must NOT use display:none or filters won't resolve */}
         <svg

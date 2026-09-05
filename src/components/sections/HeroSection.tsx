@@ -46,6 +46,8 @@ export default function HeroSection() {
         <img
           src="/hero_flower_luminous.png"
           alt=""
+          loading="eager"
+          fetchPriority="high"
           className="w-full h-full object-contain"
         />
       </div>
@@ -136,6 +138,8 @@ export default function HeroSection() {
             <img
               src="/hero_butterfly_wing.png"
               alt=""
+              loading="eager"
+              fetchPriority="high"
               className="w-full h-full object-contain"
             />
           </div>
@@ -143,6 +147,8 @@ export default function HeroSection() {
             <img
               src="/profile.jpg"
               alt="Aya Karou"
+              loading="eager"
+              fetchPriority="high"
               className="w-full h-full object-cover object-top"
             />
           </div>

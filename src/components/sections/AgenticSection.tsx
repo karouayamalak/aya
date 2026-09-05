@@ -1,11 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import { StickyScrollCards, type StickyScrollCardItem } from "@/components/ui/sticky-scroll-cards";
-
-gsap.registerPlugin(ScrollTrigger);
 
 /* ── Timeline milestones ─────────────────────────────── */
 const milestones = [
@@ -60,34 +56,6 @@ export default function AgenticSection() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const skillRefs = useRef<(HTMLDivElement | null)[]>([]);
   const statsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.set(headRef.current?.children[0] || [], { autoAlpha: 0, x: -50 });
-      gsap.set(headRef.current?.children[1] || [], { autoAlpha: 0, x: 50 });
-      gsap.set(cardRefs.current, { autoAlpha: 0, y: 50 });
-      gsap.set(skillRefs.current, { autoAlpha: 0, y: 30 });
-      gsap.set(statsRef.current, { autoAlpha: 0, y: 30 });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      tl.to(headRef.current?.children[0] || [], { autoAlpha: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0)
-        .to(headRef.current?.children[1] || [], { autoAlpha: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0.1)
-        .to(cardRefs.current, { autoAlpha: 1, y: 0, stagger: 0.15, duration: 0.55, ease: "power3.out" }, 0.25)
-        .to(skillRefs.current, { autoAlpha: 1, y: 0, stagger: 0.07, duration: 0.4, ease: "power2.out" }, 0.5)
-        .to(statsRef.current, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.7);
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <section

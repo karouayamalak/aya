@@ -2,9 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 /* ─── Data ─────────────────────────────────────────────────────────────── */
 const PROJECTS = [
@@ -91,9 +88,10 @@ const PROJECTS = [
 ];
 
 const TABS = [
+  { id: "all", label: "All Products" },
   { id: "fullstack", label: "Full Stack" },
-  { id: "frontend", label: "Frontend Only" },
   { id: "freelance", label: "Freelance" },
+  { id: "frontend", label: "Frontend Only" },
 ] as const;
 
 type TabId = typeof TABS[number]["id"];
@@ -202,40 +200,17 @@ export default function OnlineSection() {
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const [activeTab, setActiveTab] = useState<TabId>("fullstack");
+  const [activeTab, setActiveTab] = useState<TabId>("all");
 
-  const filtered = PROJECTS.filter((p) => p.type === activeTab);
+  const filtered = activeTab === "all" ? PROJECTS : PROJECTS.filter((p) => p.type === activeTab);
 
-  /* entrance animation */
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.set(headerRef.current?.children[0] || [], { autoAlpha: 0, x: -50 });
-      gsap.set(headerRef.current?.children[1] || [], { autoAlpha: 0, x: 50 });
-      gsap.set(gridRef.current, { autoAlpha: 0, y: 50 });
-
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none none",
-        },
-      })
-        .to(headerRef.current?.children[0] || [], { autoAlpha: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0)
-        .to(headerRef.current?.children[1] || [], { autoAlpha: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0.1)
-        .to(gridRef.current, { autoAlpha: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.25);
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  /* animate cards when tab changes */
+  /* animate cards smoothly when tab changes */
   useEffect(() => {
     if (!gridRef.current) return;
     gsap.fromTo(
       gridRef.current.querySelectorAll(".project-card"),
-      { autoAlpha: 0, y: 20 },
-      { autoAlpha: 1, y: 0, duration: 0.35, stagger: 0.07, ease: "power2.out", overwrite: "auto" }
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.3, stagger: 0.05, ease: "power2.out", overwrite: "auto" }
     );
   }, [activeTab]);
 

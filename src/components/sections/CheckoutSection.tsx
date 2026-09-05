@@ -1,10 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 /* ─── Types ─────────────────────────────────────────────────────────────────── */
 interface Recommendation {
@@ -98,24 +94,7 @@ export default function CheckoutSection() {
 
   useEffect(() => { fetchRecs(); }, [fetchRecs]);
 
-  /* ── Entrance animation ───────────────────────────────────────────────────── */
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.set(formRef.current, { autoAlpha: 0, x: -50 });
-      gsap.set(feedRef.current, { autoAlpha: 0, x: 50 });
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      })
-        .to(formRef.current, { autoAlpha: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0)
-        .to(feedRef.current, { autoAlpha: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0.15);
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+
 
   /* ── Submit handler ───────────────────────────────────────────────────────── */
   async function handleSubmit(e: React.FormEvent) {

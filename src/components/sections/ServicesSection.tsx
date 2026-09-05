@@ -1,11 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const SERVICES = [
   {
@@ -39,42 +35,11 @@ const SERVICES = [
   },
 ];
 
+// Content is visible immediately without requiring scroll reveal animations
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.set(headRef.current, { autoAlpha: 0, x: -40 });
-      gsap.set(".minimal-service-card", { autoAlpha: 0, y: 30 });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      tl.to(headRef.current, { autoAlpha: 1, x: 0, duration: 0.6, ease: "power3.out" })
-        .to(
-          ".minimal-service-card",
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.45,
-            stagger: 0.08,
-            ease: "power2.out",
-          },
-          "-=0.3"
-        );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const scrollToContact = () => {
     const lenis = (window as any).lenis;

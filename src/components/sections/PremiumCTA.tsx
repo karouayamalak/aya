@@ -2,11 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
-
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function PremiumCTA() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,39 +23,7 @@ export default function PremiumCTA() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const ctx = gsap.context(() => {
-      // Start glow hidden
-      gsap.set(glowRef.current, { scale: 0.7, opacity: 0.05 });
-      gsap.set(titleRef.current, { autoAlpha: 0, x: -50 });
-      gsap.set(btnGroupRef.current, { autoAlpha: 0, x: 50 });
-      gsap.set(formRef.current, { autoAlpha: 0, y: 50 });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      tl.to(titleRef.current, { autoAlpha: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0)
-        .to(btnGroupRef.current, { autoAlpha: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0.1)
-        .to(formRef.current, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.2);
-
-      // Entry glow animation
-      gsap.to(glowRef.current, {
-        scale: 1.2,
-        opacity: 0.35,
-        ease: "power2.out",
-        duration: 1.2,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      });
-
-    }, containerRef);
+    // Content is immediately visible without scroll reveal delay
 
 
     // Magnetic button effects
@@ -93,7 +57,6 @@ export default function PremiumCTA() {
     });
 
     return () => {
-      ctx.revert();
       buttons.forEach((button) => {
         const btn = button as HTMLElement;
         btn.removeEventListener("mousemove", (e) => handleMouseMove(e, btn));

@@ -102,7 +102,7 @@ export default function HeroSection() {
             </p>
           </div>
 
-          {/* Minimal Action Buttons — Zero Icons */}
+          {/* Minimal Action Buttons + CV Download */}
           <div className="flex items-center gap-3 flex-wrap justify-center lg:justify-start pt-2">
             <a
               href="#services"
@@ -124,6 +124,21 @@ export default function HeroSection() {
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Contact
+            </a>
+            {/* CV Download */}
+            <a
+              href="/resume.pdf"
+              download
+              id="download-cv-btn"
+              className="px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-all duration-200 min-h-[42px] flex items-center gap-1.5"
+              style={{ fontFamily: "var(--font-inter)" }}
+            >
+              <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download CV
             </a>
           </div>
 

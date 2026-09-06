@@ -1,30 +1,63 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { GithubCalendar } from "@/components/GithubCalendar";
 
-const ALL_TECH = [
-  { name: "Next.js", category: "Framework" },
-  { name: "React", category: "Frontend" },
-  { name: "TypeScript", category: "Language" },
-  { name: "JavaScript", category: "Language" },
-  { name: "Node.js", category: "Backend" },
-  { name: "Express.js", category: "Backend" },
-  { name: "MongoDB", category: "Database" },
-  { name: "PostgreSQL", category: "Database" },
-  { name: "Tailwind CSS", category: "Styling" },
-  { name: "GSAP", category: "Motion" },
-  { name: "Framer Motion", category: "Animation" },
-  { name: "REST APIs", category: "Architecture" },
-  { name: "HTML5 & CSS3", category: "Core" },
-  { name: "Git & GitHub", category: "Tools" },
-  { name: "Figma", category: "UI/UX" },
-  { name: "Python", category: "Language" },
+const SKILL_GROUPS = [
+  {
+    label: "Frontend",
+    color: "#a78bfa",
+    skills: [
+      { name: "React", level: 95 },
+      { name: "Next.js", level: 92 },
+      { name: "TypeScript", level: 88 },
+      { name: "HTML5 & CSS3", level: 97 },
+      { name: "Tailwind CSS", level: 90 },
+    ],
+  },
+  {
+    label: "Backend",
+    color: "#34d399",
+    skills: [
+      { name: "Node.js", level: 85 },
+      { name: "Express.js", level: 82 },
+      { name: "REST APIs", level: 88 },
+      { name: "MongoDB", level: 80 },
+      { name: "PostgreSQL", level: 70 },
+    ],
+  },
+  {
+    label: "Animation",
+    color: "#f472b6",
+    skills: [
+      { name: "GSAP", level: 88 },
+      { name: "Framer Motion", level: 78 },
+    ],
+  },
+  {
+    label: "Tools & Design",
+    color: "#fbbf24",
+    skills: [
+      { name: "Git & GitHub", level: 90 },
+      { name: "Figma", level: 75 },
+      { name: "Python", level: 70 },
+    ],
+  },
 ];
 
+
 export default function RetailSection() {
-  // Duplicated for seamless infinite marquee loop
-  const marqueeItems = [...ALL_TECH, ...ALL_TECH];
+  const barsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Stagger-animate the bars in on mount
+    const bars = barsRef.current?.querySelectorAll<HTMLDivElement>(".skill-bar-fill");
+    if (!bars) return;
+    bars.forEach((bar, i) => {
+      bar.style.transition = `width 0.9s cubic-bezier(0.4,0,0.2,1) ${i * 60}ms`;
+      bar.style.width = bar.dataset.level + "%";
+    });
+  }, []);
 
   return (
     <section
@@ -65,30 +98,63 @@ export default function RetailSection() {
         </div>
       </div>
 
-      {/* ── Single Line Tech Stack Stream (Clean & Lightweight) ── */}
-      <div className="w-full relative z-10 py-4 my-2 overflow-hidden select-none">
-        {/* Gradient edge masks for smooth fade */}
-        <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-
-        <div className="flex w-max marquee-track hover:pause">
-          {marqueeItems.map((tech, idx) => (
+      {/* ── Skills Proficiency Grid ─────────────────────────────── */}
+      <div
+        ref={barsRef}
+        className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto relative z-10 pb-8"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {SKILL_GROUPS.map((group) => (
             <div
-              key={`${tech.name}-${idx}`}
-              className="inline-flex items-center gap-2 mx-2 px-3.5 py-2 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:bg-white/[0.08]"
+              key={group.label}
+              className="rounded-2xl p-5 border border-white/8 bg-white/[0.025] backdrop-blur-sm hover:border-white/15 transition-all duration-300"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
-              <span
-                className="text-xs text-white/90 font-medium whitespace-nowrap"
-                style={{ fontFamily: "var(--font-inter)" }}
-              >
-                {tech.name}
-              </span>
-              <span
-                className="text-[9px] text-white/40 uppercase tracking-wider font-mono hidden sm:inline"
-              >
-                {tech.category}
-              </span>
+              {/* Category label */}
+              <div className="flex items-center gap-2 mb-4">
+                <span
+                  className="w-2 h-2 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: group.color, boxShadow: `0 0 8px ${group.color}80` }}
+                />
+                <span
+                  className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60"
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  {group.label}
+                </span>
+              </div>
+
+              {/* Skill bars */}
+              <div className="flex flex-col gap-3">
+                {group.skills.map((skill) => (
+                  <div key={skill.name}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span
+                        className="text-[11px] text-white/80 font-medium"
+                        style={{ fontFamily: "var(--font-inter)" }}
+                      >
+                        {skill.name}
+                      </span>
+                      <span
+                        className="text-[10px] text-white/35 font-mono"
+                      >
+                        {skill.level}%
+                      </span>
+                    </div>
+                    {/* Bar track */}
+                    <div className="h-1 rounded-full bg-white/8 overflow-hidden">
+                      <div
+                        className="skill-bar-fill h-full rounded-full"
+                        data-level={skill.level}
+                        style={{
+                          width: "0%",
+                          background: `linear-gradient(90deg, ${group.color}99, ${group.color})`,
+                          boxShadow: `0 0 6px ${group.color}60`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

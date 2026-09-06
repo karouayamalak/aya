@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
+import CopyEmailButton from "@/components/ui/CopyEmailButton";
 
 export default function PremiumCTA() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -273,7 +274,7 @@ export default function PremiumCTA() {
           <div className="flex flex-col gap-2">
             <h5 className="text-white text-[10px] font-bold uppercase tracking-wider">Contact</h5>
             <div className="flex flex-col gap-1 text-[10px]">
-              <a href="mailto:a_karou@estin.dz" className="text-white/50 hover:text-white truncate no-underline transition-colors">a_karou@estin.dz</a>
+              <CopyEmailButton />
               <div className="flex gap-3 mt-1">
                 <a
                   href="https://github.com/ayakarou"

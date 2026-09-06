@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,12 +28,21 @@ export const metadata: Metadata = {
       "Hi, I'm Aya! Full-Stack MERN developer & portfolio creator. Building custom interactive portfolio experiences & scalable MERN web applications.",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Aya Karou — Freelance Full-Stack Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Aya Karou — Full-Stack MERN & Portfolio Developer",
     description:
       "Full-stack MERN developer & creative engineer. Building bespoke portfolios and full-stack web applications.",
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -101,6 +111,7 @@ export default function RootLayout({
           </defs>
         </svg>
         {children}
+        <Analytics />
       </body>
     </html>
   );

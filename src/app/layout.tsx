@@ -64,6 +64,15 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/hero_flower_luminous.png" />
         <link rel="preload" as="image" href="/hero_butterfly_wing.png" />
         <link rel="preload" as="image" href="/profile.jpg" />
+        {/* Preload project previews so they are instantly in memory */}
+        <link rel="preload" as="image" href="/projects/coffee-boost.webp" />
+        <link rel="preload" as="image" href="/projects/unicare-clinic.webp" />
+        <link rel="preload" as="image" href="/projects/thazdayth.webp" />
+        <link rel="preload" as="image" href="/projects/veto-care.webp" />
+        <link rel="preload" as="image" href="/projects/rite-of-way.webp" />
+        <link rel="preload" as="image" href="/projects/duxel.webp" />
+        <link rel="preload" as="image" href="/projects/focusly.webp" />
+        <link rel="preload" as="image" href="/projects/bylka-bio.webp" />
       </head>
       <body className="bg-black text-white overflow-x-hidden" data-theme="dark">
         {/* Global SVG Filters — must NOT use display:none or filters won't resolve */}

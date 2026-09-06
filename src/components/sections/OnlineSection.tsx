@@ -14,7 +14,7 @@ const PROJECTS = [
     type: "fullstack",
     accent: "#ffffff",
     url: "https://coffee-boost.vercel.app",
-    image: "/projects/coffee-boost.jpg",
+    image: "/projects/coffee-boost.webp",
   },
   {
     date: "2026",
@@ -25,7 +25,7 @@ const PROJECTS = [
     type: "fullstack",
     accent: "#ffffff",
     url: "https://unicare-clinic-2.vercel.app",
-    image: "/projects/unicare-clinic.jpg",
+    image: "/projects/unicare-clinic.webp",
   },
   {
     date: "2026",
@@ -36,7 +36,7 @@ const PROJECTS = [
     type: "fullstack",
     accent: "#ffffff",
     url: "https://thazdayth.vercel.app",
-    image: "/projects/thazdayth.jpg",
+    image: "/projects/thazdayth.webp",
   },
   {
     date: "2026",
@@ -47,7 +47,7 @@ const PROJECTS = [
     type: "fullstack",
     accent: "#ffffff",
     url: "https://veto-care-2f5d.vercel.app/",
-    image: "/projects/veto-care.jpg",
+    image: "/projects/veto-care.webp",
   },
   {
     date: "2026",
@@ -58,7 +58,7 @@ const PROJECTS = [
     type: "fullstack",
     accent: "#ffffff",
     url: "https://rite-of-way-dgzx.vercel.app/",
-    image: "/projects/rite-of-way.jpg",
+    image: "/projects/rite-of-way.webp",
   },
   {
     date: "2025",
@@ -69,7 +69,7 @@ const PROJECTS = [
     type: "frontend",
     accent: "#ffffff",
     url: "https://duxel-j374.vercel.app",
-    image: "/projects/duxel.jpg",
+    image: "/projects/duxel.webp",
   },
   {
     date: "2025",
@@ -80,7 +80,7 @@ const PROJECTS = [
     type: "frontend",
     accent: "#ffffff",
     url: "https://focusly-mnw4-ten.vercel.app",
-    image: "/projects/focusly.jpg",
+    image: "/projects/focusly.webp",
   },
   {
     date: "2026",
@@ -91,7 +91,7 @@ const PROJECTS = [
     type: "freelance",
     accent: "#ffffff",
     url: "https://bylka-bio-dz.vercel.app",
-    image: "/projects/bylka-bio.jpg",
+    image: "/projects/bylka-bio.webp",
   },
 ];
 
@@ -115,7 +115,6 @@ function formatDomain(rawUrl: string): string {
 
 /* ─── Live Window Preview Component ─────────────────────────────────────── */
 function LiveProjectWindow({ project }: { project: typeof PROJECTS[number] }) {
-  const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
   const [currentSrc, setCurrentSrc] = useState(project.image || `https://s0.wp.com/mshots/v1/${encodeURIComponent(project.url)}?w=800`);
   const domain = formatDomain(project.url);
@@ -154,16 +153,7 @@ function LiveProjectWindow({ project }: { project: typeof PROJECTS[number] }) {
       </div>
 
       {/* Website Screenshot / Live Viewport */}
-      <div className="relative w-full aspect-[16/10] bg-zinc-900/60 overflow-hidden flex items-center justify-center">
-        {/* Skeleton while loading */}
-        {!imgLoaded && !imgError && (
-          <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-900 animate-pulse flex items-center justify-center">
-            <span className="text-[11px] text-white/30 font-medium" style={{ fontFamily: "var(--font-inter)" }}>
-              Loading live preview…
-            </span>
-          </div>
-        )}
-
+      <div className="relative w-full aspect-[16/10] bg-zinc-900 overflow-hidden flex items-center justify-center">
         {/* Screenshot image */}
         {!imgError ? (
           <img
@@ -171,8 +161,7 @@ function LiveProjectWindow({ project }: { project: typeof PROJECTS[number] }) {
             alt={`${project.title} landing page preview`}
             loading="eager"
             fetchPriority="high"
-            decoding="async"
-            onLoad={() => setImgLoaded(true)}
+            decoding="sync"
             onError={() => {
               if (currentSrc === project.image) {
                 // Fallback to mshots if local image fails
@@ -181,7 +170,7 @@ function LiveProjectWindow({ project }: { project: typeof PROJECTS[number] }) {
                 setImgError(true);
               }
             }}
-            className={`w-full h-full object-cover object-top transition-all duration-300 group-hover/window:scale-[1.03] ${imgLoaded ? "opacity-100" : "opacity-0"}`}
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/window:scale-[1.03]"
           />
         ) : (
           /* Fallback UI if screenshot endpoint is unreachable */

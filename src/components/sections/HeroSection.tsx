@@ -128,7 +128,7 @@ export default function HeroSection() {
             {/* CV Download */}
             <a
               href="/resume.pdf"
-              download
+              download="Aya_Karou_FullStack_Developer_CV.pdf"
               id="download-cv-btn"
               className="px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-all duration-200 min-h-[42px] flex items-center gap-1.5"
               style={{ fontFamily: "var(--font-inter)" }}

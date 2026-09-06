@@ -1,64 +1,32 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { GithubCalendar } from "@/components/GithubCalendar";
 
 const SKILL_GROUPS = [
   {
     label: "Frontend",
     color: "#a78bfa",
-    skills: [
-      { name: "React", level: 95 },
-      { name: "Next.js", level: 92 },
-      { name: "TypeScript", level: 88 },
-      { name: "HTML5 & CSS3", level: 97 },
-      { name: "Tailwind CSS", level: 90 },
-    ],
+    skills: ["React", "Next.js", "TypeScript", "JavaScript", "HTML5 & CSS3", "Tailwind CSS"],
   },
   {
     label: "Backend",
     color: "#34d399",
-    skills: [
-      { name: "Node.js", level: 85 },
-      { name: "Express.js", level: 82 },
-      { name: "REST APIs", level: 88 },
-      { name: "MongoDB", level: 80 },
-      { name: "PostgreSQL", level: 70 },
-    ],
+    skills: ["Node.js", "Express.js", "REST APIs", "MongoDB", "PostgreSQL"],
   },
   {
     label: "Animation",
     color: "#f472b6",
-    skills: [
-      { name: "GSAP", level: 88 },
-      { name: "Framer Motion", level: 78 },
-    ],
+    skills: ["GSAP", "Framer Motion", "ScrollTrigger", "Micro-interactions"],
   },
   {
     label: "Tools & Design",
     color: "#fbbf24",
-    skills: [
-      { name: "Git & GitHub", level: 90 },
-      { name: "Figma", level: 75 },
-      { name: "Python", level: 70 },
-    ],
+    skills: ["Git & GitHub", "Figma", "Postman", "Python", "Vercel"],
   },
 ];
 
-
 export default function RetailSection() {
-  const barsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Stagger-animate the bars in on mount
-    const bars = barsRef.current?.querySelectorAll<HTMLDivElement>(".skill-bar-fill");
-    if (!bars) return;
-    bars.forEach((bar, i) => {
-      bar.style.transition = `width 0.9s cubic-bezier(0.4,0,0.2,1) ${i * 60}ms`;
-      bar.style.width = bar.dataset.level + "%";
-    });
-  }, []);
-
   return (
     <section
       id="stack"
@@ -98,16 +66,13 @@ export default function RetailSection() {
         </div>
       </div>
 
-      {/* ── Skills Proficiency Grid ─────────────────────────────── */}
-      <div
-        ref={barsRef}
-        className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto relative z-10 pb-8"
-      >
+      {/* ── Skills Category Grid (Clean Tag Badges) ──────────── */}
+      <div className="w-full px-4 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto relative z-10 pb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {SKILL_GROUPS.map((group) => (
             <div
               key={group.label}
-              className="rounded-2xl p-5 border border-white/8 bg-white/[0.025] backdrop-blur-sm hover:border-white/15 transition-all duration-300"
+              className="rounded-2xl p-5 border border-white/8 bg-white/[0.025] backdrop-blur-sm hover:border-white/15 transition-all duration-300 flex flex-col"
             >
               {/* Category label */}
               <div className="flex items-center gap-2 mb-4">
@@ -123,36 +88,20 @@ export default function RetailSection() {
                 </span>
               </div>
 
-              {/* Skill bars */}
-              <div className="flex flex-col gap-3">
+              {/* Skill Tags */}
+              <div className="flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span
-                        className="text-[11px] text-white/80 font-medium"
-                        style={{ fontFamily: "var(--font-inter)" }}
-                      >
-                        {skill.name}
-                      </span>
-                      <span
-                        className="text-[10px] text-white/35 font-mono"
-                      >
-                        {skill.level}%
-                      </span>
-                    </div>
-                    {/* Bar track */}
-                    <div className="h-1 rounded-full bg-white/8 overflow-hidden">
-                      <div
-                        className="skill-bar-fill h-full rounded-full"
-                        data-level={skill.level}
-                        style={{
-                          width: "0%",
-                          background: `linear-gradient(90deg, ${group.color}99, ${group.color})`,
-                          boxShadow: `0 0 6px ${group.color}60`,
-                        }}
-                      />
-                    </div>
-                  </div>
+                  <span
+                    key={skill}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-white/80 bg-white/[0.035] border border-white/[0.08] hover:border-white/25 hover:text-white hover:bg-white/[0.08] transition-all duration-200"
+                    style={{ fontFamily: "var(--font-inter)" }}
+                  >
+                    <span
+                      className="w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: group.color, opacity: 0.8 }}
+                    />
+                    {skill}
+                  </span>
                 ))}
               </div>
             </div>

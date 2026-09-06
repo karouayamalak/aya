@@ -7,6 +7,17 @@ import gsap from "gsap";
 const PROJECTS = [
   {
     date: "2026",
+    title: "Morning Crumbs",
+    desc: "An artisanal buns & coffee bakery platform featuring interactive ordering, full menu exploration, real-time order tracking, and custom branded aesthetics.",
+    category: "Bakery & Cafe",
+    stack: ["React", "Redux", "Node.js", "Express", "Tailwind CSS"],
+    type: "fullstack",
+    accent: "#ffffff",
+    url: "https://morning-crumbs-redux.vercel.app",
+    image: "/projects/morning-crumbs.webp",
+  },
+  {
+    date: "2026",
     title: "Coffee Boost",
     desc: "A modern artisanal coffee roastery & cafe platform featuring interactive specialty brew menus, savory breakfast treats, and seamless online ordering.",
     category: "Coffee Roastery & Cafe",

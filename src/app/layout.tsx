@@ -65,6 +65,7 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/hero_butterfly_wing.png" />
         <link rel="preload" as="image" href="/profile.jpg" />
         {/* Preload project previews so they are instantly in memory */}
+        <link rel="preload" as="image" href="/projects/morning-crumbs.webp" />
         <link rel="preload" as="image" href="/projects/coffee-boost.webp" />
         <link rel="preload" as="image" href="/projects/unicare-clinic.webp" />
         <link rel="preload" as="image" href="/projects/thazdayth.webp" />

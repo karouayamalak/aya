@@ -14,6 +14,7 @@ const PROJECTS = [
     type: "fullstack",
     accent: "#ffffff",
     url: "https://coffee-boost.vercel.app",
+    image: "/projects/coffee-boost.jpg",
   },
   {
     date: "2026",
@@ -24,6 +25,7 @@ const PROJECTS = [
     type: "fullstack",
     accent: "#ffffff",
     url: "https://unicare-clinic-2.vercel.app",
+    image: "/projects/unicare-clinic.jpg",
   },
   {
     date: "2026",
@@ -34,6 +36,7 @@ const PROJECTS = [
     type: "fullstack",
     accent: "#ffffff",
     url: "https://thazdayth.vercel.app",
+    image: "/projects/thazdayth.jpg",
   },
   {
     date: "2026",
@@ -44,6 +47,7 @@ const PROJECTS = [
     type: "fullstack",
     accent: "#ffffff",
     url: "https://veto-care-2f5d.vercel.app/",
+    image: "/projects/veto-care.jpg",
   },
   {
     date: "2026",
@@ -54,6 +58,7 @@ const PROJECTS = [
     type: "fullstack",
     accent: "#ffffff",
     url: "https://rite-of-way-dgzx.vercel.app/",
+    image: "/projects/rite-of-way.jpg",
   },
   {
     date: "2025",
@@ -64,6 +69,7 @@ const PROJECTS = [
     type: "frontend",
     accent: "#ffffff",
     url: "https://duxel-j374.vercel.app",
+    image: "/projects/duxel.jpg",
   },
   {
     date: "2025",
@@ -74,6 +80,7 @@ const PROJECTS = [
     type: "frontend",
     accent: "#ffffff",
     url: "https://focusly-mnw4-ten.vercel.app",
+    image: "/projects/focusly.jpg",
   },
   {
     date: "2026",
@@ -84,6 +91,7 @@ const PROJECTS = [
     type: "freelance",
     accent: "#ffffff",
     url: "https://bylka-bio-dz.vercel.app",
+    image: "/projects/bylka-bio.jpg",
   },
 ];
 
@@ -109,8 +117,8 @@ function formatDomain(rawUrl: string): string {
 function LiveProjectWindow({ project }: { project: typeof PROJECTS[number] }) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const [currentSrc, setCurrentSrc] = useState(project.image || `https://s0.wp.com/mshots/v1/${encodeURIComponent(project.url)}?w=800`);
   const domain = formatDomain(project.url);
-  const previewSrc = `https://s0.wp.com/mshots/v1/${encodeURIComponent(project.url)}?w=800`;
 
   return (
     <a
@@ -159,12 +167,21 @@ function LiveProjectWindow({ project }: { project: typeof PROJECTS[number] }) {
         {/* Screenshot image */}
         {!imgError ? (
           <img
-            src={previewSrc}
+            src={currentSrc}
             alt={`${project.title} landing page preview`}
-            loading="lazy"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             onLoad={() => setImgLoaded(true)}
-            onError={() => setImgError(true)}
-            className={`w-full h-full object-cover object-top transition-transform duration-500 group-hover/window:scale-[1.03] ${imgLoaded ? "opacity-100" : "opacity-0"}`}
+            onError={() => {
+              if (currentSrc === project.image) {
+                // Fallback to mshots if local image fails
+                setCurrentSrc(`https://s0.wp.com/mshots/v1/${encodeURIComponent(project.url)}?w=800`);
+              } else {
+                setImgError(true);
+              }
+            }}
+            className={`w-full h-full object-cover object-top transition-all duration-300 group-hover/window:scale-[1.03] ${imgLoaded ? "opacity-100" : "opacity-0"}`}
           />
         ) : (
           /* Fallback UI if screenshot endpoint is unreachable */
